@@ -7,12 +7,16 @@ char A[],char B[];
 strcpy(A,B);将B赋值给A
 strcmp(A,B);==0相等，<0 A在B的前面
 
-string a;
+string str1, str2;
 int b;
 //字串
-a.substr (3,5);从位置为3的位置开始，长度为5
+str1.substr (3,5);从位置为3的位置开始，长度为5
 //int -> string
-a=to_string(b);
+str1=to_string(b);
 //string之间比较
 str1<str2;
 str1.compare(str2)<0;
+//查找
+str1.find('1') != -1找到了'1'
+//替换
+str1.replace(str1.find('1'),2,"@");//在str1中1开始位置的两个字符替换为@
