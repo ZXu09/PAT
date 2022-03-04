@@ -1,10 +1,22 @@
 //进制转换类
 1010 Input:N1 N2 tag Radix
-N1在Radix进制的条件下找到一个进制使得N1 == N2
+N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
 1.N1、N2在10进制的条件下进行比较
 2.N2的Radix的范围:(最小的N2的位值+1,10进制的N1+1)
 N1=10,N2=a;  使得N2==N1的Radix为10进制的N1+1=11
 3.二分法
+1015 Input:N D
+N在D进制下是否是一个reversible prime
+直接实现了10进制->radix进制，在radix进制下逆转，再->10进制
+int reverse(int N, int radix) {
+	int tmp = 0;
+	while (N) {
+		tmp = tmp * radix + N % radix;
+		N = N / radix;
+	}
+	return tmp;
+}
+
 //排队问题-queue
 1014 Input:N M K Q
 1.最大容量为N*M;大于此数的统一等候
