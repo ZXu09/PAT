@@ -1,3 +1,14 @@
 1037
-auto cb = coup.begin();或vector<int>::iterator cb是一样的
-cb是指针 *cb取出coup的值
+两组数据两两组合相乘，其和最大
+1.排序，保证最大与最大，最小与最小的组合且符号相同
+2.auto cb = coup.begin();或vector<int>::iterator cb是一样的
+3.cb是指针 *cb取出coup的值
+
+1038
+将数字组合起来使其最小
+1.绝妙的排序方法：
+bool cmp(string a, string b)
+{
+	return a + b < b + a;
+}
+说明a在b前面组合的数要更小
