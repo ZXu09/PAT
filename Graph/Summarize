@@ -2,14 +2,15 @@
 都是用Dijikstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（1个是cost最小，一个是send单车最少）
 
 1034
-图+DFS，关键点在于将姓名string类型->int类型保存在图中，用map
-1.
+图+DFS，关键点在于将姓名string类型->int类型保存在图中，用map<string, int> m;//用hash将string->int类型(key,value)
+1.ss用于用value找回key，也就是m存储时value就是cnt，而ss正好在ss[cnt]=S1；
+2.
 if (m.find(S1) != m.end()) {//找到了
-			s1 = m[S1];
+	s1 = m[S1];
 }
 else {
-			m[S1] = cnt;//计数编号
-			s1 = m[S1];
-			ss.push_back(S1);
-			cnt++;
+	m[S1] = cnt;//计数编号
+	s1 = m[S1];
+	ss.push_back(S1);
+	cnt++;
 }
