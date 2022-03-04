@@ -1,0 +1,3 @@
+//int类型 -> char类型
+char ans[];
+sprintf("%s",ans);
