@@ -5,6 +5,7 @@ N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
 2.N2的Radix的范围:(最小的N2的位值+1,10进制的N1+1)
 N1=10,N2=a;  使得N2==N1的Radix为10进制的N1+1=11
 3.二分法
+
 1015 Input:N D
 N在D进制下是否是一个reversible prime
 直接实现了10进制->radix进制，在radix进制下逆转，再->10进制
@@ -18,7 +19,12 @@ int reverse(int N, int radix) {
 }
 
 //排队问题-queue
-1014 Input:N M K Q
+1014 Input:N M K Q N个窗户每个窗户M个人
 1.最大容量为N*M;大于此数的统一等候
 2.Window 包括队首完成的时间、队尾完成的时间、当前的队列
 3.根据队首完成的时间入队，队尾完成的时间计算服务时间
+
+1017 Input:N K N个人K个窗户
+与1014的区别在于没有限定每个窗户的人数 采用优先队列priority_queue
+P 包括来的时间、等待的时间
+priority_queue<int, vector<int>, greater<int>>q;//按照到达银行的时间进行升序排序的优先队列
