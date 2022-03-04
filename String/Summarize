@@ -1,3 +1,4 @@
 //int类型 -> char类型
+int a,b;
 char ans[];
-sprintf("%s",ans);
+sprintf_s(ans, sizeof(ans), "%d", a + b);
