@@ -13,9 +13,8 @@ int main()
 	for (int i = 0;i < LenN;i++) {
 		Sum += (Num[i]-'0');
 	}
-	//输出结果
 	sprintf_s(Result, 101, "%d", Sum);
-	int flag = 0;//控制格式
+	int flag = 0;
 	LenS = strlen(Result);
 	for (int i = 0;i < LenS;i++) {
 		if (flag == 0) {
