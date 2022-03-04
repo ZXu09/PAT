@@ -2,6 +2,7 @@
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
-//char类型 -> char类型(复制)
+//char类型 -> char类型
 char A[],char B[];
 strcpy(A,B);//将B赋值给A
+strcmp(A,B);==0相等，<0 A在B的前面
