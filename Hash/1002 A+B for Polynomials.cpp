@@ -18,7 +18,6 @@ int main()
 				p[a] += b;
 		}
 	}
-	//输出多项式
 	int count = 0;
 	for (int i = 0;i < MAXN;i++) {
 		if (p[i] != 0)
