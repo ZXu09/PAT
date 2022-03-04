@@ -25,6 +25,7 @@ int reverse(int N, int radix) {
 3.根据队首完成的时间入队，队尾完成的时间计算服务时间
 
 1017 Input:N K N个人K个窗户
-与1014的区别在于没有限定每个窗户的人数 采用优先队列priority_queue
-P 包括来的时间、等待的时间
-priority_queue<int, vector<int>, greater<int>>q;//按照到达银行的时间进行升序排序的优先队列
+与1014的区别在于没有限定每个窗户的人数 采用优先队列priority_queue，保证入队后也保持有序状态
+1.P 包括来的时间、等待的时间
+2.priority_queue<int, vector<int>, greater<int>>q;//按照到达银行的时间进行升序排序的优先队列
+3.1014不能用优先队列是因为1014需要判断是入的哪一条队，用队尾完成的时间计算这个人服务完成的时间
