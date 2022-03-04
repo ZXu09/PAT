@@ -1,1 +1,8 @@
-
+1022 
+用title、author、publisher、key、publishyear查找ID
+1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
+2.for (auto it : mp[key]) {//采取auto类型+ 增强for 循环(auto迭代)
+		cout << it << endl;
+}
+3.set<string>有序，升序排列
+4.这题用map也不影响
