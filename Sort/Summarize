@@ -1,1 +1,3 @@
-
+1037
+auto cb = coup.begin();或vector<int>::iterator cb是一样的
+cb是指针 *cb取出coup的值
