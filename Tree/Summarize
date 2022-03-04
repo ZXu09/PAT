@@ -1,1 +1,4 @@
-
+1020
+postorder and inorder -> level order后序中序输出层序
+1.solve(int PreL, int InL, int PostL, int L, int index)递归得到前序并记录index
+2.利用完全二叉树存储index，利用index的大小进行排序输出
