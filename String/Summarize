@@ -13,3 +13,6 @@ int b;
 a.substr (3,5);从位置为3的位置开始，长度为5
 //int -> string
 a=to_string(b);
+//string之间比较
+str1<str2;
+str1.compare(str2)<0;
