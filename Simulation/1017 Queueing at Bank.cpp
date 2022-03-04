@@ -1,18 +1,18 @@
 #include<iostream>
 #include<queue>
 #include<algorithm>
-#define maxn 10001//×î´óÅÅ¶ÓÈËÊı
-#define begin 28800//08£º00ÒÔs¼Ç
-#define end 61200//17£º00ÒÔs¼Ç
+#define maxn 10001//æœ€å¤§æ’é˜Ÿäººæ•°
+#define begin 28800//08ï¼š00ä»¥sè®°
+#define end 61200//17ï¼š00ä»¥sè®°
 using namespace std;
 
 struct person
 {
-	int come;//À´µÄÊ±¼ä
-	int time;//µÈ´ıµÄÊ±¼ä
+	int come;//æ¥çš„æ—¶é—´
+	int time;//ç­‰å¾…çš„æ—¶é—´
 }p[maxn];
 
-int cmp(person p1, person p2)//°´ÕÕÀ´µÄÊ±¼äÉıĞòÅÅĞò
+int cmp(person p1, person p2)//æŒ‰ç…§æ¥çš„æ—¶é—´å‡åºæ’åº
 {
 	return p1.come < p2.come;
 }
@@ -22,7 +22,7 @@ int main()
 	cin >> N >> K;
 	int hh, mm, ss, tt;
 	int sum = 0;
-	int cnt = 0;//ÕæÊµ²ÎÓëµÄÈËÊı
+	int cnt = 0;//çœŸå®å‚ä¸çš„äººæ•°
 	for (int i = 0;i < N;i++) {
 		scanf_s("%d:%d:%d", &hh, &mm, &ss);
 		cin >> tt;
@@ -33,26 +33,26 @@ int main()
 		p[cnt].time = tt * 60;
 		cnt++;
 	}
-	sort(p, p + cnt, cmp);//°´ÕÕµ½´ïÒøĞĞµÄÊ±¼ä½øĞĞÅÅĞò
-	priority_queue<int, vector<int>, greater<int>>q;//°´ÕÕÉıĞòÅÅĞòµÄÓÅÏÈ¶ÓÁĞ
+	sort(p, p + cnt, cmp);//æŒ‰ç…§åˆ°è¾¾é“¶è¡Œçš„æ—¶é—´è¿›è¡Œæ’åº
+	priority_queue<int, vector<int>, greater<int>>q;//æŒ‰ç…§å‡åºæ’åºçš„ä¼˜å…ˆé˜Ÿåˆ—
 	for (int i = 0;i < K;i++) {
-		q.push(begin);//½«Ã¿¸ö´°¿ÚµÄÆğÊ¼ÖµÈë¶Ó
+		q.push(begin);//å°†æ¯ä¸ªçª—å£çš„èµ·å§‹å€¼å…¥é˜Ÿ
 	}
-	int total = 0;//×ÜµÈ´ıÃëÊı
+	int total = 0;//æ€»ç­‰å¾…ç§’æ•°
 	for (int i = 0;i < cnt;i++) {
-		if (p[i].come < q.top()) {//À´µÄ±È¶ÓÊ×½áÊø·şÎñµÄÊ±¼äÒªÍí-µÈ´ı
-			total += (q.top() - p[i].come);//µÈ´ıµÄÊ±¼ä
-			q.push(q.top() + p[i].time);//½«¸ÃÈËÍê³É·şÎñµÄÊ±¼äÈë¶Ó
-			q.pop();//¶ÓÊ×³ö¶Ó
+		if (p[i].come < q.top()) {//æ¥çš„æ¯”é˜Ÿé¦–ç»“æŸæœåŠ¡çš„æ—¶é—´è¦æ—©-ç­‰å¾…
+			total += (q.top() - p[i].come);//ç­‰å¾…çš„æ—¶é—´
+			q.push(q.top() + p[i].time);//å°†è¯¥äººå®ŒæˆæœåŠ¡çš„æ—¶é—´å…¥é˜Ÿ
+			q.pop();//é˜Ÿé¦–å‡ºé˜Ÿ
 		}
-		else {//À´µÄ±È¶ÓÊ×½áÊø·şÎñµÄÊ±¼äÒªÔç-²»ÓÃµÈ´ı
-			q.push(p[i].come + p[i].time);//Ö±½Ó°ìÀíÒµÎñ£¬Èë¶Ó
-			q.pop();//¶ÓÊ×³ö¶Ó
+		else {//æ¥çš„æ¯”é˜Ÿé¦–ç»“æŸæœåŠ¡çš„æ—¶é—´è¦æ™š-ä¸ç”¨ç­‰å¾…
+			q.push(p[i].come + p[i].time);//ç›´æ¥åŠç†ä¸šåŠ¡ï¼Œå…¥é˜Ÿ
+			q.pop();//é˜Ÿé¦–å‡ºé˜Ÿ
 		}
 	}
 	if (cnt == 0)
 		printf("0.0\n");
 	else
-		printf("%.1f\n", (total / 60.0) / cnt * 1.0);//¼ÆËã½á¹û
+		printf("%.1f\n", (total / 60.0) / cnt * 1.0);//è®¡ç®—ç»“æœ
 	return 0;
 }
