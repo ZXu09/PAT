@@ -12,3 +12,8 @@ bool cmp(string a, string b)
 	return a + b < b + a;
 }
 说明a在b前面组合的数要更小
+1053
+vector<vector<int>> ans;//存放所有路径
+ans.push_back(v);v是条路径
+对每种情况按字典序从大到小排序
+sort(ans.begin(), ans.end(), greater<vector<int>>());
