@@ -22,3 +22,5 @@ str1.find('1') != -1找到了'1'
 str1.replace(str1.find('1'),2,"@");//在str1中1开始位置的两个字符替换为@
 //翻转
 reverse(str1.begin(), str1.end());//要algorithm头文件
+//删除
+str1.erase(str1.find(str2[i]), 1);//在str1中删除字符str2[i]
