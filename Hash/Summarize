@@ -17,3 +17,10 @@ int getid(char* name) //hash散列
 	id = id * 10 + (name[3] - '0');
 	return id;
 }
+1047 与 1039是同一类型的题
+方法1：
+getid(char* name) getname(int id)分别转换char和int类型
+在vector中存储最后按照课程号进行输出
+方法2：
+char name[40010][5];
+输入的N个同学就存储在name[i]中这个方法要方便很多，但占用的内存也会更大一些
