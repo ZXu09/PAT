@@ -56,3 +56,19 @@ int stack[1010] = { 0 }, top = 0;//创建一个栈
 1.栈顶元素更小-入栈直到和栈顶元素和序列元素相同
 2.相等-出栈
 3.栈顶元素更大-不符合堆栈的规则如312
+
+//比赛名次
+1056 Mice and Rice
+分组决胜负晋级的思想-queue,胜者晋级，败者相同的名次
+利用play order取每个一小鼠的weight并入队,在修改rank的过程中用present order,最后用playing order 排序就回到了最初的顺序
+1.playing order 和 present order 不同
+Weight:       25 18 0 46 37 3 19 22 57 56 10
+
+playing order: 6 0 8 7 10 5 9 1 4 2 3 (原本小鼠在的位置的下标)
+queue:        19 25 57 22 10 3 56 18 47 0 46
+present order: 0 1 2 3 4  5 6 7 8 9 10(排成了playing order后小鼠的下标)
+
+因此入队时Weight[6] = 19 Weight[0] = 25 ...
+queue:    19 25 57 22 10 3 56 18 47 0 46
+3.w[temp.porder].rank = group + 1;一轮一轮地修改rank
+并存取group内的max重新入队,如果当前剩下的老鼠可以分为group组，那么这一组里面没有晋级的老鼠排名就是group+1
