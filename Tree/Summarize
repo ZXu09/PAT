@@ -17,3 +17,34 @@ while (j > s && pre[s] <= pre[j]) j--;//满足比根节点大就递减
 
 //树状数组
 1057 Stack
+树状数组，方便求sum和进行修改；时间复杂度均为O(logN)
+本题的核心在于求第k = (s.size() + 1) / 2大的数。查询小于等于x的数的个数是否等于k
+1.int c[maxn]树状数组，每个结点代表其子树结点出现的次数
+2.#define lowbit(i) ((i)&(-i))//取最低位的1
+3.void update(int x, int v)//单点修改(v代表出现了x的次数)
+{
+	for (int i = x;i < maxn;i += lowbit(i)) {
+		c[i] += v;//顺着树向上爬
+	}
+}
+int getsum(int x)//区域查询,小于等于x的数的个数
+{
+	int sum = 0;
+	for (int i = x;i >= 1;i -= lowbit(i)) {
+		sum += c[i];
+	}
+	return sum;
+}
+void PeekMedian() //二分法
+{
+	int left = 1, right = maxn, mid;//Key保证>0
+	int k = (s.size() + 1) / 2;//代表要求的第k大小的数
+	while (left < right) {
+		mid = (left + right) / 2;
+		if (getsum(mid) >= k)//小于等于mid的数的个数大于k个
+			right = mid;
+		else
+			left = mid + 1;
+	}
+	printf("%d\n", left);
+}
