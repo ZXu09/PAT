@@ -72,3 +72,15 @@ present order: 0 1 2 3 4  5 6 7 8 9 10(排成了playing order后小鼠的下标)
 queue:    19 25 57 22 10 3 56 18 47 0 46
 3.w[temp.porder].rank = group + 1;一轮一轮地修改rank
 并存取group内的max重新入队,如果当前剩下的老鼠可以分为group组，那么这一组里面没有晋级的老鼠排名就是group+1
+
+//set的应用
+1063 Set Similarity 
+找出两个集合中相同和不同的元素比值
+set<int>s;递增+无重复元素
+存入vector<set<int>>v(N);方便比较
+for (auto it = v[a - 1].begin();it != v[a - 1].end(); it++) {
+	if (v[b - 1].find(*it) != v[b - 1].end())
+		Nc++;//有重复的
+	else
+		Nt++;//无重复的
+}
