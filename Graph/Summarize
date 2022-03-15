@@ -1,5 +1,5 @@
-1018和1030
-都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（1个是cost最小，一个是send单车最少）
+1018和1030和1087
+都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（一个是cost最小，一个是send单车最少，一个是happiness最多）
 
 1034
 图+DFS，关键点在于将姓名string类型->int类型保存在图中，用map<string, int> m;//用hash将string->int类型(key,value)
