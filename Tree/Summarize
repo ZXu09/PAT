@@ -48,3 +48,12 @@ void PeekMedian() //二分法
 	}
 	printf("%d\n", left);
 }
+
+//1064 Complete Binary Search Tree
+BST -> level order traversal
+排序后的BST相当于中序遍历
+利用BST的性质，判断左子树的长度，得到根节点的值
+层序遍历：
+tree[root]=node[L+Leftlength];
+Levelorder(L, L + Leftlength - 1, 2*root+1);//左子树
+Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
