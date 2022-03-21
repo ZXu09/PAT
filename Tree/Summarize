@@ -57,3 +57,6 @@ BST -> level order traversal
 tree[root]=node[L+Leftlength];
 Levelorder(L, L + Leftlength - 1, 2*root+1);//左子树
 Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
+
+//AVL树（平衡二叉树）
+利用定义实现，LL,RR旋转
