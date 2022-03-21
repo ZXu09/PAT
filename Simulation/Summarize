@@ -18,6 +18,16 @@ int reverse(int N, int radix) {
 	return tmp;
 }
 
+//数据溢出
+1065 A+B and C (64bit)
+
+32位系统：
+longlong -2^63~2^63-1,上溢会<0下溢会>0 long -2^31~2^31-1
+64位Win系统LLP64
+与32位的区别是pointer是64位
+64位Linux系统LP64
+long64位pointer64位
+
 //排队问题
 1014 Input:N M K Q N个窗户每个窗户M个人queue
 1.最大容量为N*M;大于此数的统一等候
