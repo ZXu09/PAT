@@ -16,3 +16,6 @@ for (int i = 0; i < l; i++) {
 dp[]数组存储的是到达该结点最长的颜色顺序
 3.遍历j，j属于0-i，如果a[j]>=a[i]满足order时
 判断dp[i] = max(dp[i], dp[j] + 1);
+
+1068 Find More Coins 
+找到满足V1+V2+...Vk=M的最小序列
