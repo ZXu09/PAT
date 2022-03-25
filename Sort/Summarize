@@ -17,3 +17,8 @@ vector<vector<int>> ans;//存放所有路径
 ans.push_back(v);v是条路径
 对每种情况按字典序从大到小排序
 sort(ans.begin(), ans.end(), greater<vector<int>>());
+
+1067 Sort with Swap(0, i)
+表排序的特点，判断0是否在这个环里
+1.按照i=Num[i]遍历环，并修改Num[i] = i(方便判断环的结束)
+2.环中有0 交换N-1次；环中无0 交换N+1次
