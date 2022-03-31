@@ -9,10 +9,12 @@ strcmp(A,B);==0相等，<0 A在B的前面
 
 string str1, str2;
 int b;
-//字串
+//子串
 str1.substr (3,5);从位置为3的位置开始，长度为5
 //int -> string
 str1=to_string(b);
+//string -> int
+b = stoi(str1);
 //string之间比较
 str1<str2;
 str1.compare(str2)<0;
