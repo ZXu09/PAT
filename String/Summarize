@@ -14,7 +14,7 @@ str1.substr (3,5);从位置为3的位置开始，长度为5
 //int -> string
 str1=to_string(b);
 //string -> int
-b = stoi(str1);
+b = stoi(str1.c_str());字符串类型->int
 //string之间比较
 str1<str2;
 str1.compare(str2)<0;
