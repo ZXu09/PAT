@@ -26,7 +26,8 @@ str1.replace(str1.find('1'),2,"@");//在str1中1开始位置的两个字符替�
 reverse(str1.begin(), str1.end());//要algorithm头文件
 //删除
 str1.erase(str1.find(str2[i]), 1);//在str1中删除字符str2[i]
-
+//插入
+str.insert(str.end(),10,'s');//在str的结尾插入10个s
 1071 Speech Patterns
 
 1.tolower(s[i]);//统一小写
