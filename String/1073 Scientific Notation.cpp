@@ -10,11 +10,11 @@ int main()
 	while (a[i] != 'E') {
 		if (a[i] >= '0' && a[i] <= '9') {
 			b += a[i];
-			cnt++;//¼ÇÂ¼ÓĞ¼¸Î»Êı×Ö
+			cnt++;//è®°å½•æœ‰å‡ ä½æ•°å­—
 		}
 		i++;
 	}
-	//´ËÊ±a[i]=='E'
+	//æ­¤æ—¶a[i]=='E'
 	string s;
 	i++;
 	if (a[i] == '+') {
@@ -24,9 +24,9 @@ int main()
 		}
 		int len = atoi(s.c_str());
 		if (len >= cnt - 1)
-			b.insert(b.end(), len - cnt + 1, '0');//½áÎ²µÄµØ·½²åÈë
+			b.insert(b.end(), len - cnt + 1, '0');//ç»“å°¾çš„åœ°æ–¹æ’å…¥
 		else
-			b.insert(cnt - len + 1, 1, '.');
+			b.insert(len + 1, 1, '.');
 	}
 	else if (a[i] == '-') {
 		i++;
@@ -34,8 +34,8 @@ int main()
 			s += a[i];
 		}
 		int len = atoi(s.c_str());
-		b.insert(0, len, '0');//¿ªÊ¼µÄµØ·½²åÈë
-		b.insert(1, 1, '.');//²åÈëĞ¡Êıµã
+		b.insert(0, len, '0');//å¼€å§‹çš„åœ°æ–¹æ’å…¥
+		b.insert(1, 1, '.');//æ’å…¥å°æ•°ç‚¹
 	}
 	if (a[0] == '-')
 		printf("-");
