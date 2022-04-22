@@ -60,3 +60,9 @@ Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
 
 //AVL树（平衡二叉树）
 利用定义实现，LL,RR旋转
+
+1086 Tree Traversals Again 
+栈和遍历之间的关系：
+PUSH：preorder
+POP: inorder
+利用前序和中序遍历solve后序
