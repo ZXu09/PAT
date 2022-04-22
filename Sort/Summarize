@@ -22,3 +22,14 @@ sort(ans.begin(), ans.end(), greater<vector<int>>());
 表排序的特点，判断0是否在这个环里
 1.按照i=Num[i]遍历环，并修改Num[i] = i(方便判断环的结束)
 2.环中有0 交换N-1次；环中无0 交换N+1次
+
+1080 Graduate Admission
+首先对每位同学的成绩进行排序，再按照规则插入学校
+二维数组：	vector<vector<int>>v(M);//元素为vector的vector
+排序：	for (auto it = v.begin();it != v.end();it++) {
+		sort(it->begin(),it->end());
+	}
+另一种二维数组排序：
+二维数组：  vector<int>v[M];
+排序：  for(int i = 0; i < M; i++)//元素为vector的数组
+          sort(sch[i].begin(), sch[i].end(), cmp2);
