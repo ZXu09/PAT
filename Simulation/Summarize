@@ -96,5 +96,6 @@ for (auto it = v[a - 1].begin();it != v[a - 1].end(); it++) {
 }
 //gcd
 1081 Rational Sum
+1088 Rational Arithmetic
 辗转相除法求最大公因数
 long long gcd(long long a, long long b) {return b == 0 ? a : gcd(b, a % b);}
