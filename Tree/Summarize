@@ -66,3 +66,13 @@ Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
 PUSH：preorder
 POP: inorder
 利用前序和中序遍历solve后序
+
+1099 Build A Binary Search Tree
+inorder中序遍历填值，因为是BST树满足左边小右边大，因此将key排序后就可以填值
+void inOrder(int root)//中序遍历填值
+{
+	if (root == -1) return;
+	inOrder(T[root].left); //-1也要插入
+	T[root].data = key[num++];
+	inOrder(T[root].right);
+}
