@@ -49,3 +49,8 @@ for (int i = 1; i <= n; i++) {
             }
         }
     }
+
+1103 Integer Factorization
+求解一个整数N分解成K个数的P次方的和 N = n[1]^P + ... n[K]^P
+1.初始化v[i]为所有比N小的所有i^P
+2.v[i]自后往前DFS遍历，满足sum + v[i] <= N则继续循环，不满足或者对于这个i已经遍历完全了则i--
