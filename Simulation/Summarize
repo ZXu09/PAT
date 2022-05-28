@@ -99,3 +99,6 @@ for (auto it = v[a - 1].begin();it != v[a - 1].end(); it++) {
 1088 Rational Arithmetic
 辗转相除法求最大公因数
 long long gcd(long long a, long long b) {return b == 0 ? a : gcd(b, a % b);}
+
+1104 Sum of Number Segments
+就题目而言只是一道简单的找规律题，但是注意double类型数值相加的精度误差，所以转化为long long类型*1000相加最后/1000.0
