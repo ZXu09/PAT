@@ -6,3 +6,22 @@
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
+
+1114 Family Property
+并查集
+int find(int x)//找到没有父结点的那个结点
+{
+	while (x != father[x]) {
+		x = father[x];
+	}
+	return x;
+}
+void Union(int a, int b)//使得ID最小的结点成为根节点
+{
+	int fa = find(a);
+	int fb = find(b);
+	if (fa > fb)
+		father[fa] = fb;
+	else if (fa < fb)
+		father[fb] = fa;
+}
