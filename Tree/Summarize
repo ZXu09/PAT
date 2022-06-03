@@ -81,3 +81,26 @@ void inOrder(int root)//中序遍历填值
 我的方法：BFS遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
 柳神方法：DFS遍历找到最大index下标，对比结点数
 
+1115 Counting Nodes in a Binary Search Tree
+求一个二叉搜索树最后两层的结点
+1.建树
+struct Node
+{
+	int data;
+	PNode left, right;
+};
+
+PNode Build(PNode root, int data)
+{
+	if (root == NULL) {
+		root = new Node();
+		root->data = data;
+		root->left = root->right = NULL;
+	}
+	else if (data <= root->data)
+		root->left = Build(root->left, data);
+	else
+		root->right = Build(root->right, data);
+	return root;
+}
+2.DFS(PNode root, int depth)
