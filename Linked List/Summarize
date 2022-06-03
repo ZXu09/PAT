@@ -25,3 +25,6 @@ void Union(int a, int b)//使得ID最小的结点成为根节点
 	else if (fa < fb)
 		father[fb] = fa;
 }
+
+1118 Birds in Forest
+同理并查集
