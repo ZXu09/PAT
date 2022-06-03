@@ -104,3 +104,26 @@ PNode Build(PNode root, int data)
 	return root;
 }
 2.DFS(PNode root, int depth)
+
+1119 Pre- and Post-order Traversals
+给定先序和后序，判断中序及是否唯一  秒极！！
+void Traversal(int prel, int prer, int postl, int postr)
+{
+	if (prel == prer) {//该子树只有一个结点了
+		in.push_back(pre[prel]);
+		return;
+	}
+	if (pre[prel] == post[postr]) {//找到左右子树
+		int i = prel + 1;//遍历preorder找到右子树（存在）的根结点
+		while (i <= prer && pre[i] != post[postr - 1])
+			i++;
+		//左子树长度i-prel-1
+		if (i - prel > 1) {//代表根和右子树之间至少隔了一个结点，也就是有左子树
+			Traversal(prel + 1, i - 1, postl, postl + (i - prel - 1) - 1);
+		}
+		else//假设左子树为空，考虑只有右子树的情况
+			unique = false;
+		in.push_back(post[postr]);//根
+		Traversal(i, prer, postl + (i - prel - 1), postr - 1);
+	}
+}
