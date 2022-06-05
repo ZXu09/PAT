@@ -1,4 +1,6 @@
-1018和1030和1087
+1018 Public Bike Management 30
+1030 Travel Plan 30
+1087 All Roads Lead to Rome 30
 都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（一个是cost最小，一个是send单车最少，一个是happiness最多）
 
 1034
