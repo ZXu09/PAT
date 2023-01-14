@@ -1,3 +1,2 @@
-# PAT
-Go Forward
-PAT (Advanced Level) Practice
+知识点总结：
+小写字母比大写字母的ASCII码值大32
