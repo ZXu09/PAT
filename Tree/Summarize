@@ -1,3 +1,6 @@
+1004
+利用Father[ID_i] = ID记忆结点之间的父子关系，再统计level
+
 1020
 postorder and inorder -> level order后序中序输出层序
 1.solve(int PreL, int InL, int PostL, int L, int index)递归得到前序并记录index
