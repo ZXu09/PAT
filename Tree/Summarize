@@ -19,12 +19,12 @@ while (j > s && pre[s] <= pre[j]) j--;//满足比根节点大就递减
    6   10
   5 7 8 11
 
-//树状数组
-1057 Stack
+//树状数组 
+1057 Stack 求栈中元素的中位数
 树状数组，方便求sum和进行修改；时间复杂度均为O(logN)
 本题的核心在于求第k = (s.size() + 1) / 2大的数。查询小于等于x的数的个数是否等于k
 1.int c[maxn]树状数组，每个结点代表其子树结点出现的次数
-2.#define lowbit(i) ((i)&(-i))//取最低位的1
+2.#define lowbit(i) ((i)&(-i))//取最低位的1，最右边的1连带后面的0，比如10100->100
 3.void update(int x, int v)//单点修改(v代表出现了x的次数)
 {
 	for (int i = x;i < maxn;i += lowbit(i)) {
