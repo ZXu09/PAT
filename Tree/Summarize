@@ -73,13 +73,13 @@ Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
 An AVL tree is a self-balancing binary search tree.
 利用定义实现，LL,RR旋转
 
-1086 Tree Traversals Again 
+1086 Tree Traversals Again 25
 栈和遍历之间的关系：
 PUSH：preorder
 POP: inorder
 利用前序和中序遍历solve后序
 
-1099 Build A Binary Search Tree
+1099 Build A Binary Search Tree 30
 inorder中序遍历填值，因为是BST树满足左边小右边大，因此将key排序后就可以填值
 void inOrder(int root)//中序遍历填值
 {
@@ -89,7 +89,7 @@ void inOrder(int root)//中序遍历填值
 	inOrder(T[root].right);
 }
 
-1110 Complete Binary Tree
+1110 Complete Binary Tree 
 我的方法：BFS遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
 柳神方法：DFS遍历找到最大index下标，对比结点数
 
