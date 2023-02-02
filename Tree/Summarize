@@ -1,12 +1,12 @@
-1004
+1004 Counting Leaves 30
 利用Father[ID_i] = ID记忆结点之间的父子关系，再统计level
 
-1020
+1020 Tree Traversals 25
 postorder and inorder -> level order后序中序输出层序
 1.solve(int PreL, int InL, int PostL, int L, int index)递归得到前序并记录index
 2.利用完全二叉树存储index，利用index的大小进行排序输出
 
-1043
+1043  Is It a Binary Search Tree 25
 Input:preorder 中左右
 1.preorder的特点，左边界为根节点，右边界为最大值
 2.void PostOrder(int s, int e)//s为根节点、e为最大的结点(这棵树的起始和结束结点)
@@ -26,7 +26,7 @@ while (j > s && pre[s] <= pre[j]) j--;//满足比根节点大就递减
 这三个区间怎么来的呢？其实就是不断地去掉二进制数最右边的一个1的过程
 1011->1010->1000 c[1011]+c[1010]+c[1000]
 
-1057 Stack 求栈中元素的中位数
+1057 Stack 30 -求栈中元素的中位数
 树状数组，方便求sum和进行修改；时间复杂度均为O(logN)
 本题的核心在于求第k = (s.size() + 1) / 2大的数。查询小于等于x的数的个数是否等于k
 
@@ -60,11 +60,11 @@ void PeekMedian() //二分法
 	printf("%d\n", left);
 }
 
-//1064 Complete Binary Search Tree
+1064 Complete Binary Search Tree 30 -计算左子树长度
 BST -> level order traversal
 排序后的BST相当于中序遍历
 利用BST的性质，判断左子树的长度，得到根节点的值
-层序遍历：
+层序遍历：利用index，即root
 tree[root]=node[L+Leftlength];
 Levelorder(L, L + Leftlength - 1, 2*root+1);//左子树
 Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
