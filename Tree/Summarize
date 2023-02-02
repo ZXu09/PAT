@@ -70,6 +70,7 @@ Levelorder(L, L + Leftlength - 1, 2*root+1);//左子树
 Levelorder(L + Leftlength + 1,R, 2*root+2);//右子树
 
 //AVL树（平衡二叉树）
+An AVL tree is a self-balancing binary search tree.
 利用定义实现，LL,RR旋转
 
 1086 Tree Traversals Again 
