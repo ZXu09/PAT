@@ -89,7 +89,9 @@ void inOrder(int root)//中序遍历填值
 	inOrder(T[root].right);
 }
 
-1110 Complete Binary Tree 
+1102 Invert a Binary Tree 25
+
+1110 Complete Binary Tree 25
 我的方法：BFS遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
 柳神方法：DFS遍历找到最大index下标，对比结点数
 
