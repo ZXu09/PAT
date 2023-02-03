@@ -8,23 +8,32 @@ postorder and inorder -> level order后序中序输出层序
 2.利用完全二叉树存储index，利用index的大小进行排序输出
 
 ### 1043  Is It a Binary Search Tree 25
-Input:preorder 中左右
-1.preorder的特点，左边界为根节点，右边界为最大值
 
-2.`void PostOrder(int s, int e);`
-s为根节点、e为最大的结点(这棵树的起始和结束结点)
-
-3.从左右两边逼近
-`i=s,j=e，i++,j--;`
-i<=e j>s 需要限制不越界 i<=e是因为在只有单边子树时i要越过j
-`while (i <= e && pre[s] > pre[i]) i++;`
-满足比根节点小就递增
-`while (j > s && pre[s] <= pre[j]) j--;`
-满足比根节点大就递减
-若满足当pre[i]>pre[j]时 i-j==1 满足完全二叉搜索树
-例：  8   pre[4]=10>pre[3]=7满足条件
-   6   10
-  5 7 8 11
+```C++
+void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
+{
+	if (!flag || l > r)
+		return;
+	int i = l + 1, j = r;//i为左子树的根，j为右子树最大
+	if (!isMirror) {//BST 左小右大
+		//注意i<=r是因为存在只有左/右子树的情况，此时j为左子树最大，i要越过j
+		while (i <= r && Pre[i] < Pre[l])i++;//比根Pre[l]小，递增
+		while (j > l && Pre[j] >= Pre[l])j--;//比根Pre[l]大，递减
+	}
+	if (isMirror) {
+		while (i <= r && Pre[i] >= Pre[l])i++;//比根Pre[l]大，递增
+		while (j > l && Pre[j] < Pre[l])j--;//比根Pre[l]小，递减
+	}
+	if (i - j != 1) {//此时i对应的结点比根小，j对应的结点比根大，相差为1
+		flag = false;
+		return;
+	}
+	//后序-左右中
+	PostOrder(l + 1, i - 1);//左子树
+	PostOrder(i, r);//右子树
+	Post.push_back(Pre[l]);//根节点入队
+}
+ ```
 
 ***
 **树状数组**
