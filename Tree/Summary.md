@@ -10,8 +10,10 @@ postorder and inorder -> level order后序中序输出层序
 ### 1043  Is It a Binary Search Tree 25
 Input:preorder 中左右
 1.preorder的特点，左边界为根节点，右边界为最大值
+
 2.`void PostOrder(int s, int e);`
 s为根节点、e为最大的结点(这棵树的起始和结束结点)
+
 3.从左右两边逼近
 `i=s,j=e，i++,j--;`
 i<=e j>s 需要限制不越界 i<=e是因为在只有单边子树时i要越过j
@@ -19,10 +21,11 @@ i<=e j>s 需要限制不越界 i<=e是因为在只有单边子树时i要越过j
 满足比根节点小就递增
 `while (j > s && pre[s] <= pre[j]) j--;`
 满足比根节点大就递减
-若满足当pre[i]>pre[j]时i-j==1满足完全二叉搜索树
+若满足当pre[i]>pre[j]时 i-j==1 满足完全二叉搜索树
 例：  8   pre[4]=10>pre[3]=7满足条件
    6   10
   5 7 8 11
+
 ***
 **树状数组**
 
