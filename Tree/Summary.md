@@ -8,7 +8,8 @@ postorder and inorder -> level order后序中序输出层序
 2.利用完全二叉树存储index，利用index的大小进行排序输出
 
 ### 1043  Is It a Binary Search Tree 25
-
+输入先序遍历的序列
+递归思想：对每个根节点，判断其是否满足BST的定义
 ```C++
 void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
 {
@@ -34,7 +35,14 @@ void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
 	Post.push_back(Pre[l]);//根节点入队
 }
  ```
-
+ ```
+ 
+如:8
+ 6  10
+5 7 8 11
+pre[]=8 6 5 7 10 8 11 -> 8 6 5 7 10 8 11
+ 	i          j           j  i
+```
 ***
 **树状数组**
 
