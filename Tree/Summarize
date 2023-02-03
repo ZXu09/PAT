@@ -90,12 +90,13 @@ void inOrder(int root)//中序遍历填值
 }
 
 1102 Invert a Binary Tree 25
+类似1099 Inorder+Levelorder
 
 1110 Complete Binary Tree 25
-我的方法：BFS遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
-柳神方法：DFS遍历找到最大index下标，对比结点数
+我的方法：Levelorder遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
+柳神方法：Inorder遍历找到最大index下标，对比结点数
 
-1115 Counting Nodes in a Binary Search Tree
+1115 Counting Nodes in a Binary Search Tree 30
 求一个二叉搜索树最后两层的结点
 1.建树
 struct Node
