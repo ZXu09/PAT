@@ -6,6 +6,9 @@ cin >> a >> b;
 char ans[10];//存放数据字符串类型
 sprintf_s(ans, sizeof(ans), "%d", a + b);//VS
 sprintf(ans, "%d", a + b);//PAT
+
+//string类型不适合进行字符比较比如
+if (ans[i] != '-' && (i != len - 1) && (len - i - 1) % 3 == 0)
 ```
 **strlen()**
 ```C++
