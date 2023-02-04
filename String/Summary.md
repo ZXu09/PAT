@@ -3,13 +3,14 @@
 ```C++
 int a, b;
 cin >> a >> b;
-char ans[8];//存放数据字符串类型
+char ans[10];//存放数据字符串类型
 sprintf_s(ans, sizeof(ans), "%d", a + b);//VS
 sprintf(ans, "%d", a + b);//PAT
 ```
 **strlen()**
 ```C++
 #include<cstring>//PAT
+char ans[10];
 int len = strlen(ans);
 ```
 int a,b;
