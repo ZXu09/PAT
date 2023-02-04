@@ -1,3 +1,5 @@
+### int <-> char
+
 //int类型 -> char类型
 int a,b;
 char ans[];
