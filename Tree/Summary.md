@@ -11,8 +11,10 @@ postorder and inorder -> level order后序中序输出层序
 
 ### 1086 Tree Traversals Again 25
 **栈和遍历之间的关系**：
+
 PUSH：preorder
 POP: inorder
+
 利用前序和中序遍历solve后序
 
 ### 1119 Pre- and Post-order Traversals
