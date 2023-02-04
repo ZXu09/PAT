@@ -1,11 +1,42 @@
 ### 1004 Counting Leaves 30
 利用  `Father[ID_i] = ID;`记忆结点之间的父子关系，再统计level
 
+***
+**Traversal**
 ### 1020 Tree Traversals 25
 postorder and inorder -> level order后序中序输出层序
 1.`solve(int PreL, int InL, int PostL, int L, int index);`
 递归得到前序并记录index
 2.利用完全二叉树存储index，利用index的大小进行排序输出
+
+### 1086 Tree Traversals Again 25
+**栈和遍历之间的关系**：
+PUSH：preorder
+POP: inorder
+利用前序和中序遍历solve后序
+
+### 1119 Pre- and Post-order Traversals
+给定先序和后序，判断中序及是否唯一  秒极！！
+```C++
+void Traversal(int prel, int prer, int postl, int postr)
+{
+	if (prel == prer) {//只有一个结点的子树
+		in.push_back(pre[prel]);
+		return;
+	}
+	int i = prel + 1;//pre中找到右子树（存在）的根
+	while (i <= prer && pre[i] != post[postr - 1])
+		i++;//此时i为右子树的根
+	int leftlength = i - prel - 1;//i-prel-1为左子树的长度
+	if (i - prel > 1) {//存在左子树()
+		Traversal(prel + 1, i - 1, postl, postl + leftlength - 1);
+	}
+	else//此时只有一边子树，即右子树
+		unique = false;
+	in.push_back(pre[prel]);//访问根节点
+	Traversal(i, prer, postl + leftlength, postr - 1);//若只有一个子树，默认为右子树
+}
+```
 
 ### 1043  Is It a Binary Search Tree 25
 输入先序遍历的序列
@@ -170,11 +201,6 @@ BinTree Insert(BinTree T, int V)
 	return T;
 }
 ```
-### 1086 Tree Traversals Again 25
-**栈和遍历之间的关系**：
-PUSH：preorder
-POP: inorder
-利用前序和中序遍历solve后序
 
 ### 1099 Build A Binary Search Tree 30
 inorder中序遍历填值，因为是BST树满足左边小右边大，因此将key排序后就可以填值
@@ -248,25 +274,4 @@ void Inorder(PNode root, int depth) {
 	Inorder(root->right, depth + 1);
 }
 ```
-### 1119 Pre- and Post-order Traversals
-给定先序和后序，判断中序及是否唯一  秒极！！
-```C++
-void Traversal(int prel, int prer, int postl, int postr)
-{
-	if (prel == prer) {//只有一个结点的子树
-		in.push_back(pre[prel]);
-		return;
-	}
-	int i = prel + 1;//pre中找到右子树（存在）的根
-	while (i <= prer && pre[i] != post[postr - 1])
-		i++;//此时i为右子树的根
-	int leftlength = i - prel - 1;//i-prel-1为左子树的长度
-	if (i - prel > 1) {//存在左子树()
-		Traversal(prel + 1, i - 1, postl, postl + leftlength - 1);
-	}
-	else//此时只有一边子树，即右子树
-		unique = false;
-	in.push_back(pre[prel]);//访问根节点
-	Traversal(i, prer, postl + leftlength, postr - 1);//若只有一个子树，默认为右子树
-}
-```
+
