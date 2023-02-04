@@ -1,6 +1,17 @@
 ### int <-> char
-
-//int类型 -> char类型
+**sprint() int->char**
+```C++
+int a, b;
+cin >> a >> b;
+char ans[8];//存放数据字符串类型
+sprintf_s(ans, sizeof(ans), "%d", a + b);//VS
+sprintf(ans, "%d", a + b);//PAT
+```
+**strlen()**
+```C++
+#include<cstring>//PAT
+int len = strlen(ans);
+```
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
