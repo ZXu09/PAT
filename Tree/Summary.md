@@ -3,19 +3,17 @@
 
 ***
 **Traversal**
+通过两个如前序和中序的序列求另一个序列
 ### 1020 Tree Traversals 25
 postorder and inorder -> level order后序中序输出层序
-1.`solve(int PreL, int InL, int PostL, int L, int index);`
-递归得到前序并记录index
-2.利用完全二叉树存储index，利用index的大小进行排序输出
+ 1. `solve(int PreL, int InL, int PostL, int L, int index);`递归得到前序并记录index
+ 2. 利用完全二叉树存储index，利用index的大小进行排序输出
 
 ### 1086 Tree Traversals Again 25
 **栈和遍历之间的关系**：
-
-PUSH：preorder
-POP: inorder
-
-利用前序和中序遍历solve后序
+ 1. PUSH：preorder
+ 2. POP: inorder
+ 3. 利用前序和中序遍历solve后序
 
 ### 1119 Pre- and Post-order Traversals
 给定先序和后序，判断中序及是否唯一  秒极！！
@@ -41,8 +39,8 @@ void Traversal(int prel, int prer, int postl, int postr)
 ```
 
 ### 1043  Is It a Binary Search Tree 25
-输入先序遍历的序列
-递归思想：对每个根节点，判断其是否满足BST的定义
+- 输入先序遍历的序列
+- 递归思想：对每个根节点，判断其是否满足BST的定义
 ```C++
 void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
 {
@@ -82,13 +80,13 @@ pre[]=8 6 5 7 10 8 11 -> 8 6 5 7 10 8 11
  1. 单点修改：更改数组中一个元素的值
  2. 区间查询：查询一个区间内所有元素的和
  
-例如11，转化为二进制数就是1011，如果我们要求前11项和，可以分别查询 [(0000),(1000)]、[(1000),(1010)]以及[(1010),(1011)]的和再相加。
-这三个区间怎么来的呢？其实就是不断地去掉二进制数最右边的一个1的过程
-1011->1010->1000 对应c[1011]+c[1010]+c[1000]
+- 例如11，转化为二进制数就是1011，如果我们要求前11项和，可以分别查询 [(0000),(1000)]、[(1000),(1010)]以及[(1010),(1011)]的和再相加。
+- 这三个区间怎么来的呢？其实就是不断地去掉二进制数最右边的一个1的过程
+- 1011->1010->1000 对应c[1011]+c[1010]+c[1000]
 
 ### 1057 Stack 30 -求栈中元素的中位数
-树状数组，方便求sum和进行修改；时间复杂度均为O(logN)
-本题的核心在于求第k = (s.size() + 1) / 2大的数。查询小于等于x的数的个数是否等于k
+- 树状数组，方便求sum和进行修改；时间复杂度均为O(logN)
+- 本题的核心在于求第k = (s.size() + 1) / 2大的数。查询小于等于x的数的个数是否等于k
 
  1. `int c[maxn]`树状数组，c[i]代表其子树结点出现的次数
  2. `#define lowbit(i) ((i)&(-i))`取最低位的1，最右边的1连带后面的0，比如10100->100
@@ -127,10 +125,9 @@ void PeekMedian() //二分法
 ```
 
 ### 1064 Complete Binary Search Tree 30 -计算左子树长度
-BST -> level order traversal
-排序后的BST相当于中序遍历
-利用BST的性质，判断左子树的长度，得到根节点的值
-层序遍历：利用index，即root
+ 1. BST -> level order traversal；排序后的BST相当于中序遍历
+ 2. 利用BST的性质，判断左子树的长度，得到根节点的值
+ 3. 层序遍历：利用index，即root
 ```C++
 void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
 {
@@ -159,6 +156,7 @@ void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
 **AVL树（平衡二叉树）**
 An AVL tree is a self-balancing binary search tree.
 利用定义实现
+
 ### 1066 Root of AVL Tree 25
 ```C++
 BinTree LL(BinTree T)
@@ -204,6 +202,9 @@ BinTree Insert(BinTree T, int V)
 }
 ```
 
+### 1123 Is It a Complete AVL Tree 30
+AVL树的知识以及1110 Complete Binary Tree的Levelorder遍历(利用flag)
+
 ### 1099 Build A Binary Search Tree 30
 inorder中序遍历填值，因为是BST树满足左边小右边大，因此将key排序后就可以填值
 ```C++
@@ -238,8 +239,8 @@ void Levelorder(int root)
 类似1099的解决方法
 
 ### 1110 Complete Binary Tree 25
-我的方法：Levelorder遍历，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
-柳神方法：Inorder遍历找到最大index下标，对比结点数
+- 我的方法：Levelorder遍历(利用flag)，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
+- 柳神方法：Inorder遍历找到最大index下标，对比结点数
 
 ### 1115 Counting Nodes in a Binary Search Tree
 求一个二叉搜索树最后两层的结点
