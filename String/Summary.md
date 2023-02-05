@@ -10,6 +10,13 @@ sprintf(ans, "%d", a + b);//PAT
 //string类型不适合进行字符比较比如
 if (ans[i] != '-' && (i != len - 1) && (len - i - 1) % 3 == 0)
 ```
+
+**char->int**
+```C++
+char Num[101];
+Sum += (Num[i]-'0');
+```
+
 **strlen()**
 ```C++
 #include<cstring>//PAT
