@@ -1,6 +1,5 @@
 
-**最大子列和**
-### 1007 Maximum Subsequence Sum 25
+### 1007 Maximum Subsequence Sum 25-最大子列和
 ```C++
 void MaxSubsequm2(int A[], int N)//稍作改进-O(N^2)-可以全过
 {
@@ -101,6 +100,28 @@ int MaxSubsequm4(int A[], int N)//分而治之
  2. 若发现有油站更便宜，直接到那个油站，（此时不补满油）
  3. 若未发现更便宜的，就到可选择的油站中最便宜的油站（此时补满油）
 
+### 1044 Shopping in Mars 25-二分查找
+sum[i]存储前i项和因此sum数组是递增的，想到二分法
+```C++
+for (int i = 1; i <= n; i++) {
+        cin >> sum[i];
+        sum[i] += sum[i - 1];//sum[i]表示1~i的求和
+}
+//实现i->n 以i为起点最接近m的序列和
+void Dichotomy(int i, int& j, int& tempsum) {
+    int left = i, right = n;
+    //寻找合适的mid，使得i->mid的值最接近m
+    while (left < right) {
+        int mid = (left + right) / 2;//二分
+        if (sum[mid] - sum[i - 1] >= m)//i->mid的值大于等于需求(若恰好等于，在二分结束前right都不会变)
+            right = mid;//左边
+        else//i->mid的值小于需求
+            left = mid + 1;//右边
+    }
+    j = right;
+    tempsum = sum[j] - sum[i - 1];//i->j的所有的值
+}
+```
 1045 Favorite Color Stripe 30
 找到按照特定喜欢的颜色顺序的最长子序列（可拼接）
 Input:喜欢的颜色顺序2 3 1 5 6
