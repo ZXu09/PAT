@@ -145,7 +145,7 @@ for (int i = 0; i < l; i++) {
 ```C++
 for (int i = 0; i < num; i++) {
         dp[i] = 1;
-        for (int j = 0; j < i; j++)
+        for (int j = 0; j < i; j++)//看i之前的a[]，若有数字更小或相等的的则更新dp[i](dp[i]按顺序1、2、3这样加上去)
             if (a[i] >= a[j])
                 dp[i] = max(dp[i], dp[j] + 1);
         maxn = max(dp[i], maxn);
