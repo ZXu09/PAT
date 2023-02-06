@@ -122,20 +122,33 @@ void Dichotomy(int i, int& j, int& tempsum) {
     tempsum = sum[j] - sum[i - 1];//i->j的所有的值
 }
 ```
-1045 Favorite Color Stripe 30
+### 1045 Favorite Color Stripe 30
 找到按照特定喜欢的颜色顺序的最长子序列（可拼接）
 Input:喜欢的颜色顺序2 3 1 5 6
-1.用book数组存储颜色的顺序book[2]=1,book[3]=2...book[6]=5;
-2.利用a数组只存储喜欢的颜色，且存储内容是book数组的值，这样就得到了顺序，num计数组内元素的个数
+ 1. 用book数组存储颜色的顺序`book[2]=1,book[3]=2...book[6]=5;`
+ 2. 利用a数组只存储喜欢的颜色，且存储内容是book数组的值，这样就得到了顺序，num计数组内元素的个数
+- 输入序列：2 2 4 1 5 5 6 3 1 1 5 6
+- 存储喜欢：2 2 1 5 5 6 3 1 1 5 6
+- 存储内容：1 1 3 4 4 5 2 3 3 4 5
+```C++
 for (int i = 0; i < l; i++) {
         cin >> x;
         if (book[x] >= 1)
             a[num++] = book[x];
 }
-dp[]数组存储的是到达该结点最长的颜色顺序
-3.遍历j，j属于0-i，如果a[j]>=a[i]满足order时
+```
+- dp[]数组存储的是到达该结点最长的颜色顺序
+ 3. 遍历j，j属于0-i，如果a[j]>=a[i]满足order时
 判断dp[i] = max(dp[i], dp[j] + 1);
-
+```C++
+for (int i = 0; i < num; i++) {
+        dp[i] = 1;
+        for (int j = 0; j < i; j++)
+            if (a[i] >= a[j])
+                dp[i] = max(dp[i], dp[j] + 1);
+        maxn = max(dp[i], maxn);
+}
+```
 01背包问题：给定背包能装物品的体积，每个物品有对应的体积和价值，求背包能装的下最大的价值
 物品编号： 1 2 3 4
 w体积：    2 3 4 5
