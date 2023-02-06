@@ -1,5 +1,6 @@
 
 **最大子列和**
+### 1007 Maximum Subsequence Sum 25
 ```C++
 void MaxSubsequm2(int A[], int N)//稍作改进-O(N^2)-可以全过
 {
