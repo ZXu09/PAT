@@ -248,7 +248,38 @@ while (v > 0) {
         index--;
 }
 ```
-1103 Integer Factorization 30
-求解一个整数N分解成K个数的P次方的和 N = n[1]^P + ... n[K]^P
-1.初始化v[i]为所有比N小的所有i^P
-2.v[i]自后往前DFS遍历，满足sum + v[i] <= N则继续循环，不满足或者对于这个i已经遍历完全了则i--
+### 1103 Integer Factorization 30
+- 求解一个整数N分解成K个数的P次方的和 N = n[1]^P + ... n[K]^P
+```C++
+void init()//初始化v数组为所有比N小的所有i^P
+{
+	int tmp = 0, i = 1;
+	while (tmp <= N) {//这样i = 0时v[i] = 0;i = 1时v[i] = 1相对应
+		v.push_back(tmp);
+		tmp = pow(i, P);
+		i++;
+	}
+}
+```
+```C++
+int maxfacsum = -1;//分解因式之和
+void DFS(int i, int tempK, int sum, int facsum)//从v[i]的最后(从大到小)开始进行DFS
+{
+	if (tempK == K) {//计数为K个时
+		if (sum == N && facsum > maxfacsum) {//maximum sum of the factors
+			maxfacsum = facsum;
+			ans = tmpans;//存储答案
+		}
+		return;
+	}
+	while (i >= 0) {//i存储在数组v的下标,也就是该数组
+		if (sum + v[i] <= N) {//把v[i]的可能的组合都试一次
+			tmpans[tempK] = i;//存入tmpans
+			DFS(i, tempK + 1, sum + v[i], facsum + i);
+		}
+		if (i == 1)//到1返回，不用统计0
+			return;
+		i--;//只有相加直到sum+v[i]>N时才会让i--
+	}
+}
+```
