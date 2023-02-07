@@ -212,15 +212,15 @@ void FindPave(int i, int j)
 ### 1068 Find More Coins 30
 **01背包的变体，相当于不限制体积的背包，但是限制装入coins的顺序**
 - 找到满足V1+V2+...Vk=M的最小序列
-- **dp[i](1维)表示在求和后 <= i的最大的数**
+- **dp[i]1维，表示在求和后 <= i的最大的数**
 ```C++
 bool choice[10010][110];//存储被访问过的dp[],方便输出哪些结点被访问过了N-10^4硬币数量,M-10^2凑的总金额
 sort(w + 1, w + n + 1, cmp1);//逆序排序
 //input_w[i]:5 9 8 7 2 3 4 1
 //sort_w[i]:9 8 7 5 4 3 2 1
-for (int i = 1; i <= n; i++) {
-        for (int j = m; j >= w[i]; j--) {//j要满足比该w[i]大，比m小,因此dp[j]一定会小于等于j
-            if (dp[j] <= dp[j - w[i]] + w[i]) {//满足递推要求
+for (int i = 1; i <= n; i++) {//硬币的数量递增
+        for (int j = m; j >= w[i]; j--) {//j是想要取到的序列和，若币值更大：w[i]>j，那一定不会取这个硬币
+            if (dp[j] <= dp[j - w[i]] + w[i]) {//满足递推要求（在取这个硬币之后没爆）
                 choice[i][j] = true;//取到数列和j可以通过硬币i
                 dp[j] = dp[j - w[i]] + w[i];
             }
@@ -228,7 +228,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 ```C++
-choice[i][j]//取到数列和j可以通过硬币i
+choice[i][j] = //取到数列和j可以通过硬币i
 (1 9)(2 8)
 (3 7)
 (4 6)(4 5)
@@ -236,6 +236,17 @@ choice[i][j]//取到数列和j可以通过硬币i
 (6 8)(6 7)(6 3)
 (7 9)(7 7)(7 6)(7 5)(7 2)
 (8 9)(8 8)(8 7)(8 6)(8 5)(8 4)(8 3)(8 1)
+```
+```C++
+//根据choice的结果进行输出
+int v = m, index = n;//index=n从币值最小的硬币开始
+while (v > 0) {
+	if (choice[index][v] == true) {
+                arr.push_back(w[index]);
+                v -= w[index];
+            }
+        index--;
+}
 ```
 1103 Integer Factorization 30
 求解一个整数N分解成K个数的P次方的和 N = n[1]^P + ... n[K]^P
