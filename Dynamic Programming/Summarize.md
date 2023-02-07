@@ -101,7 +101,7 @@ int MaxSubsequm4(int A[], int N)//分而治之
  3. 若未发现更便宜的，就到可选择的油站中最便宜的油站（此时补满油）
 
 ### 1044 Shopping in Mars 25-二分查找
-sum[i]存储前i项和因此sum数组是递增的，想到二分法
+**累计->sum[i]存储前i项和**因此sum数组是递增的，想到二分法
 ```C++
 for (int i = 1; i <= n; i++) {
         cin >> sum[i];
@@ -121,6 +121,15 @@ void Dichotomy(int i, int& j, int& tempsum) {
     j = right;
     tempsum = sum[j] - sum[i - 1];//i->j的所有的值
 }
+```
+### 1046 Shortest Distance 20
+给定环状路径，求最短路径
+**累计->sum[i]存储前i项和**
+```C+++
+int b, e;//开始和结束
+Sum[i] = Sum[i - 1] + Dis[i];//sum[i]代表从1到达i+1所需要的路程
+dis = Sum[e - 1] - Sum[b - 1];//b~e的距离
+cout << min(dis,sum-dis) << endl;//正着走和反着走
 ```
 ### 1045 Favorite Color Stripe 30
 找到按照特定喜欢的颜色顺序的最长子序列（可拼接）
