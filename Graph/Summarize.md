@@ -47,10 +47,72 @@ void Dijkstra(int S)
 }
 ```
 ### 1018 Public Bike Management 30 -DFS()+Dijkstra()
-
-
 - 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
-
+- 寻找最短路径-Dijkstra()，利用prenode记录最短路径的上一个结点，方便对最短路径进行遍历
+```C++
+void Dijkstra(int S)//单源最短路径
+{
+	fill(Dist, Dist + 501, INF);
+	Dist[S] = 0;
+	while (1) {
+		int u = -1;//未收录顶点中权值最小
+		int mint = INF;
+		for (int i = 0;i < N;i++) {
+			if (!Visited[i] && Dist[i] < mint) {
+				mint = Dist[i];
+				u = i;
+			}
+		}
+		if (u == -1)//没有找到
+			return;
+		Visited[u] = true;//已经被访问过
+		for (int i = 0; i <= N; i++) {
+			if (!Visited[i] && G[u][i] != INF) {
+				if (Dist[u] + G[u][i] < Dist[i]) {
+					Dist[i] = Dist[u] + G[u][i];
+					prenode[i].clear();
+					prenode[i].push_back(u);
+				}
+				else if (Dist[u] + G[u][i] == Dist[i]) {
+					prenode[i].push_back(u);
+				}
+			}
+		}
+	}
+}
+```
+- 对每一条最短路径进行比较，取发送单车数量最少的，若相等则取接受单车数量最少的
+```C++
+void DFS(int vi)//传入有问题的地点
+{
+	if (vi == 0) {//此时已经是到了原点了
+		tmppath.push_back(0);
+		int minsendtmp = 0, minbacktmp = 0;
+		for (int i = tmppath.size() - 2; i >= 0; i--) {//不考虑0点（出发点）
+			int t = tmppath[i];//起始点为0点（出发点）前一个
+			if (minbacktmp + C[t] < CMax / 2)//判断是否要返回车
+				//说明不用返回车，要带过去车
+				minsendtmp += CMax / 2 - (minbacktmp + C[t]), minbacktmp = 0;
+			else {//要返回车
+				if (C[t] > CMax / 2)//多了
+					minbacktmp += C[t] - CMax / 2;//多的就要回去的时候带上
+				else//少了
+					minbacktmp -= CMax / 2 - C[t];//直接减去
+			}
+		}
+		if (minsendtmp < minsend)//更新路径
+			path = tmppath, minsend = minsendtmp, minback = minbacktmp;
+		else if (minsendtmp == minsend && minbacktmp < minback)
+			path = tmppath, minback = minbacktmp;
+		tmppath.pop_back();//原点(0)弹出
+		return;//此时这一条路径已经走完了
+	}
+	tmppath.push_back(vi);
+	for (int i = 0; i < prenode[vi].size(); i++)//遍历该结点之前的结点
+		DFS(prenode[vi][i]);
+	tmppath.pop_back();//将vi这个结点弹出
+}
+```
 1018 Public Bike Management 30
 1030 Travel Plan 30
 1087 All Roads Lead to Rome 30
