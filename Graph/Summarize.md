@@ -1,36 +1,36 @@
-### 1003 Emergency 25-Dijkstra()
-- 图存储路径长度，点上有权重Weight，寻找最短路径的个数Num[]，以及在此基础上的权重最大值Gather[]
+### 1003 Emergency 25 -Dijkstra()
+- 图存储路径长度，点上有救援队人数Weight[]，寻找最短路径的个数Num[]，最短路径相等则比较路径的权重最大值Gather[]
 ```C++
 int G[501][501];
 fill(G[0], G[0] + 501 * 501, INF);
 
 int Weight[501];//路径权重
-int Collected[501] = { 0 };//该结点是否被访问
+bool Visited[501] = { false };//是否访问过
 int Dist[501];//最短路径长度
 int Num[501] = { 0 };//最短路径的条数
 int Gather[501] = { 0 };//最大支援队集结数
 
-void Dijkstra()
+void Dijkstra(int S)
 {
 	fill(Dist, Dist + 501, INF);
-	Dist[C1] = 0;//起始点
-	Gather[C1] = Weight[C1];//在起始点的救援队个数
-	Num[C1] = 1;//最短路径的条数1条
+	Dist[S] = 0;//起始点
+	Gather[S] = Weight[C1];//在起始点的救援队个数
+	Num[S] = 1;//最短路径的条数1条
 
 	while (1)
 	{
 		int u = -1, mindist = INF;
 		for (int i = 0;i < N;i++) {
-			if (Collected[i] == 0 && Dist[i] < mindist) {
+			if (!Visited[i] && Dist[i] < mindist) {
 				mindist = Dist[i];
 				u = i;//未收录顶点中Dist最小者
 			}
 		}
 		if (u == -1)//这样的顶点不存在
 			break;
-		Collected[u] = -1;//u即将被访问
+		Visited[i] = true;//u即将被访问
 		for (int i = 0;i < N;i++) {
-			if (Collected[i] == 0 && G[u][i] != INF) {//未访问过的邻结点i
+			if (!Collected[i] && G[u][i] != INF) {//未访问过的邻结点i
 				if (Dist[i] > Dist[u] + G[u][i]) {
 					Dist[i] = Dist[u] + G[u][i];//更新最短路径长度
 					Num[i] = Num[u];//更新最短路径的条数(与上一个顶点u一样)
@@ -46,7 +46,10 @@ void Dijkstra()
 	}
 }
 ```
+### 1018 Public Bike Management 30 -DFS()+Dijkstra()
 
+
+- 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
 
 1018 Public Bike Management 30
 1030 Travel Plan 30
