@@ -90,13 +90,13 @@ void DFS(int vi)//传入有问题的地点
 		int minsendtmp = 0, minbacktmp = 0;
 		for (int i = tmppath.size() - 2; i >= 0; i--) {//不考虑0点（出发点）
 			int t = tmppath[i];//起始点为0点（出发点）前一个
-			if (minbacktmp + C[t] < CMax / 2)//判断是否要返回车
-				//说明不用返回车，要带过去车
+			//判断是否要返回车
+			if (minbacktmp + C[t] < CMax / 2)//车不够用，要带过去车
 				minsendtmp += CMax / 2 - (minbacktmp + C[t]), minbacktmp = 0;
 			else {//要返回车
-				if (C[t] > CMax / 2)//多了
+				if (C[t] > CMax / 2)//返回的车多了
 					minbacktmp += C[t] - CMax / 2;//多的就要回去的时候带上
-				else//少了
+				else//返回的车少了
 					minbacktmp -= CMax / 2 - C[t];//直接减去
 			}
 		}
