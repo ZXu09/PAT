@@ -66,7 +66,7 @@ void Dijkstra(int S)
 }
 ```
 ***
-### 1018 Public Bike Management 30 -DFS()+Dijkstra()
+### 1018 Public Bike Management 30 -DFS(int vi)+Dijkstra(int S)
 - 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
 - 寻找最短路径-Dijkstra()，利用prenode记录最短路径的上一个结点，方便对最短路径进行遍历
 ```C++
@@ -133,26 +133,48 @@ void DFS(int vi)//传入有问题的地点
 	tmppath.pop_back();//将vi这个结点弹出
 }
 ```
-### 1030 Travel Plan 30 -DFS()+Dijkstra()
+### 1030 Travel Plan 30 -DFS(int D)+Dijkstra(int S)
 - 边上存储distance和cost，找distance最小，相同则找cost最小，思路与1018一致，更加简单一些
 1018 Public Bike Management 30
 1030 Travel Plan 30
 1087 All Roads Lead to Rome 30
 都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（一个是cost最小，一个是send单车最少，一个是happiness最多）
 
-1034 Head of a Gang 30
-图+DFS，关键点在于将姓名string类型->int类型保存在图中，用map<string, int> m;//用hash将string->int类型(key,value)
-1.ss用于用value找回key，也就是m存储时value就是cnt，而ss正好在ss[cnt]=S1；
-2.
-if (m.find(S1) != m.end()) {//找到了
-	s1 = m[S1];
+### 1034 Head of a Gang 30 -DFS()
+- 姓名string->int：map<string, int> m;
+- int->string：vector<string> ss; ss.push_back(S1);
+```C++
+void GetAns()
+{
+	for (int i = 0; i < cnt; i++) {//对每个群进行遍历
+		//Count：群中人数，maxi：暂存权值，maxID：权值最大的人，total：一个群的总权值
+		Count = 0; maxi = 0; total = 0;
+		if (visited[i] == 0)
+			DFS(i);
+		if (Count > 2 && total > K) {
+			string s = ss[maxId] + " " + to_string(Count);//转换为string
+			ans.push_back(s);
+		}
+	}
 }
-else {
-	m[S1] = cnt;//计数编号
-	s1 = m[S1];
-	ss.push_back(S1);
-	cnt++;
+void DFS(int S)
+{
+	Count++;//判断这个群中有几人
+	visited[S] = 1;
+	if (weight[S] > maxi) {
+		maxi = weight[S];
+		maxId = S;//最大权值的人的
+	}
+	for (int i = 0;i < cnt;i++) {
+		if (G[S][i] > 0) {
+			total += G[S][i];//总共的
+			if (!visited[i])
+				DFS(i);
+		}
+	}
 }
+```
+
 
 1072 Gas Station 30
 从m个加油站里面选取1个站点，让他离居民区的最近的人最远，并且没有超出服务范围ds之内
