@@ -23,6 +23,23 @@ Sum += (Num[i]-'0');
 char ans[10];
 int len = strlen(ans);
 ```
+
+### int <-> string
+```C++
+map<string, int> m;//用hash将string->int类型(key:string, value:int)
+string S1, S2;//AAA->1
+vector<string> ss;//实现int->string(value->key)
+int s1, s2;//存储转化后的整形
+if (m.find(S1) != m.end()) {//找到了
+	s1 = m[S1];
+}
+else {
+	m[S1] = cnt;//计数编号
+	s1 = m[S1];
+	ss.push_back(S2);
+	cnt++;
+}
+```
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
