@@ -65,6 +65,7 @@ void Dijkstra(int S)
 	}
 }
 ```
+***
 ### 1018 Public Bike Management 30 -DFS()+Dijkstra()
 - 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
 - 寻找最短路径-Dijkstra()，利用prenode记录最短路径的上一个结点，方便对最短路径进行遍历
@@ -132,6 +133,8 @@ void DFS(int vi)//传入有问题的地点
 	tmppath.pop_back();//将vi这个结点弹出
 }
 ```
+### 1030 Travel Plan 30 -DFS()+Dijkstra()
+- 边上存储distance和cost
 1018 Public Bike Management 30
 1030 Travel Plan 30
 1087 All Roads Lead to Rome 30
