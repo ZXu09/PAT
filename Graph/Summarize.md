@@ -1,4 +1,23 @@
-### 1003 Emergency 25 -Dijkstra()
+### 1021 Deepest Root 25 -DPS(int S, int deep)
+-对每个结点进行DFS遍历，找到最大深度，比较简单
+```C++
+void DFS(int S, int deep)//dfs找到最大深度
+{
+	visited[S] = true;
+	//访问S的每个邻接点
+	for (int i = 0;i < G[S].size();i++) {
+		if (!visited[G[S][i]]) {
+			visited[G[S][i]] = true;
+			if (deep > maxd) {
+				maxd = deep;
+			}
+			DFS(G[S][i], deep + 1);
+		}
+	}
+}
+```
+
+### 1003 Emergency 25 -Dijkstra(int S)
 - 图存储路径长度，点上有救援队人数Weight[]，寻找最短路径的个数Num[]，最短路径相等则比较路径的权重最大值Gather[]
 ```C++
 int G[501][501];
