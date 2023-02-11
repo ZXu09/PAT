@@ -7,8 +7,6 @@ char ans[10];//存放数据字符串类型
 sprintf_s(ans, sizeof(ans), "%d", a + b);//VS
 sprintf(ans, "%d", a + b);//PAT
 
-//string类型不适合进行字符比较比如
-if (ans[i] != '-' && (i != len - 1) && (len - i - 1) % 3 == 0)
 ```
 
 **char->int**
@@ -24,21 +22,10 @@ char ans[10];
 int len = strlen(ans);
 ```
 
-### int <-> string
+### string->int
 ```C++
-map<string, int> m;//用hash将string->int类型(key:string, value:int)
-string S1, S2;//AAA->1
-vector<string> ss;//实现int->string(value->key)
-int s1, s2;//存储转化后的整形
-if (m.find(S1) != m.end()) {//找到了
-	s1 = m[S1];
-}
-else {
-	m[S1] = cnt;//计数编号
-	s1 = m[S1];
-	ss.push_back(S2);
-	cnt++;
-}
+string s;
+int b = atoi(s.c_str());
 ```
 int a,b;
 char ans[];
