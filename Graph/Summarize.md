@@ -97,6 +97,11 @@ void Dijkstra(int S)
 	}
 }
 ```
+### 1072 Gas Station 30 -Dijkstra(int S)
+- 主要是注意比较的顺序，经典Dijkstra更新Dist数组
+1. 从m个加油站里面选取1个站点，让他离居民区的最近的人最远，并且没有超出服务范围ds之内。
+2. 如果有很多个最远的加油站，输出距离所有居民区距离平均值最小的那个。
+3. 如果平均值还是一样，就输出按照顺序排列加油站编号最小的那个
 ***
 ### 1018 Public Bike Management 30 -DFS(int vi)+Dijkstra(int S)
 - 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
