@@ -1,3 +1,35 @@
+### Graph中的string
+1. string中无数字类型如"AAA"
+```C++
+map<string, int> m;//实现string->int(key:string, value:int)
+vector<string> ss;//实现int->string(value->key)
+//AAA->0
+string S1, S2;//AAA
+int s1, s2;//0
+int cnt = 0;
+if (m.find(S1) != m.end()) {//找到了
+	s1 = m[S1];
+}
+else {
+	m[S1] = cnt;//计数编号
+	s1 = m[S1];
+	ss.push_back(S1);
+	cnt++;
+}
+```
+2. string中有数字类型如"G0"
+```C++
+string S1;
+int s1;
+if (S1[0] != 'G')//不是Gx
+	s1 = atoi(S1.c_str());//string->int
+else {
+	if (S1.size() == 3)//G10的情况
+		s1 = N + (S1[1] - '0') * 10 + S1[2] - '0';//跳过N number of houses
+	else s1 = N + S1[1] - '0';
+}
+```
+
 ### 1021 Deepest Root 25 -DPS(int S, int deep)
 -对每个结点进行DFS遍历，找到最大深度，比较简单
 ```C++
