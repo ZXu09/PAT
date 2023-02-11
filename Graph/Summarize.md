@@ -1,3 +1,4 @@
+## 一、输入
 ### Graph中的string
 1. string中无数字类型如"AAA"
 ```C++
@@ -30,7 +31,8 @@ else {
 }
 ```
 
-### 1021 Deepest Root 25 -DPS(int S, int deep)
+**二、DFS**
+### 1021 Deepest Root 25 -DFS(int S, int deep)
 -对每个结点进行DFS遍历，找到最大深度，比较简单
 ```C++
 void DFS(int S, int deep)//dfs找到最大深度
@@ -49,6 +51,76 @@ void DFS(int S, int deep)//dfs找到最大深度
 }
 ```
 
+### 1034 Head of a Gang 30 -DFS()
+- 姓名string->int：map<string, int> m;
+- int->string：vector<string> ss; ss.push_back(S1);
+```C++
+void GetAns()
+{
+	for (int i = 0; i < cnt; i++) {//对每个群进行遍历
+		//Count：群中人数，maxi：暂存权值，maxID：权值最大的人，total：一个群的总权值
+		Count = 0; maxi = 0; total = 0;
+		if (visited[i] == 0)
+			DFS(i);
+		if (Count > 2 && total > K) {
+			string s = ss[maxId] + " " + to_string(Count);//转换为string
+			ans.push_back(s);
+		}
+	}
+}
+void DFS(int S)
+{
+	Count++;//判断这个群中有几人
+	visited[S] = 1;
+	if (weight[S] > maxi) {
+		maxi = weight[S];
+		maxId = S;//最大权值的人的
+	}
+	for (int i = 0;i < cnt;i++) {
+		if (G[S][i] > 0) {
+			total += G[S][i];//总共的
+			if (!visited[i])
+				DFS(i);
+		}
+	}
+}
+```
+
+## 三、BFS
+### 1076 Forwards on Weibo 30 -BFS(int S)
+看在对应层数的限制下订阅传播的最大值，存储的时候注意：`G[S][i] = 1;//i 订阅了 S`，方便找传播的人数（订阅他的人数）
+```C++
+struct Node
+{
+	int data;
+	int level;
+};
+int  BFS(Node S)
+{
+	bool collected[1010] = { false };//重置collected
+	collected[S.data] = true;//该结点已经被访问
+	queue<Node>q;
+	q.push(S);
+	int cnt = 0;
+	while (!q.empty()) {
+		Node top = q.front();//首结点
+		q.pop();
+		int topdata = top.data;
+		for (int i = 1;i <= N;i++) {
+			//i订阅了topdata（遍历所有订阅了topdata的人）
+			if (G[topdata][i] == 1 && !collected[i] && top.level < L) {
+				//是下一层的结点且未访问过且层数满足条件（看top的level）
+				Node Next = { i,top.level + 1 };
+				q.push(Next);
+				collected[Next.data] = true;
+				cnt++;
+			}
+		}
+	}
+	return cnt;
+}
+```
+## 四、Dijkstra
 ### 1003 Emergency 25 -Dijkstra(int S)
 - 图存储路径长度，点上有救援队人数Weight[]，寻找最短路径的个数Num[]，最短路径相等则比较路径的权重最大值Gather[]
 ```C++
@@ -102,7 +174,8 @@ void Dijkstra(int S)
 1. 从m个加油站里面选取1个站点，让他离居民区的最近的人最远，并且没有超出服务范围ds之内。
 2. 如果有很多个最远的加油站，输出距离所有居民区距离平均值最小的那个。
 3. 如果平均值还是一样，就输出按照顺序排列加油站编号最小的那个
-***
+
+## 五、DFS+Dijkstra
 ### 1018 Public Bike Management 30 -DFS(int vi)+Dijkstra(int S)
 - 图存储路径长度，点上有单车数Weight[]，寻找最短路径，最短路径相等则比较路径send和back的单车数，并输出路径
 - 寻找最短路径-Dijkstra()，利用prenode记录最短路径的上一个结点，方便对最短路径进行遍历
@@ -177,40 +250,6 @@ void DFS(int vi)//传入有问题的地点
 1087 All Roads Lead to Rome 30
 都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（一个是cost最小，一个是send单车最少，一个是happiness最多）
 
-### 1034 Head of a Gang 30 -DFS()
-- 姓名string->int：map<string, int> m;
-- int->string：vector<string> ss; ss.push_back(S1);
-```C++
-void GetAns()
-{
-	for (int i = 0; i < cnt; i++) {//对每个群进行遍历
-		//Count：群中人数，maxi：暂存权值，maxID：权值最大的人，total：一个群的总权值
-		Count = 0; maxi = 0; total = 0;
-		if (visited[i] == 0)
-			DFS(i);
-		if (Count > 2 && total > K) {
-			string s = ss[maxId] + " " + to_string(Count);//转换为string
-			ans.push_back(s);
-		}
-	}
-}
-void DFS(int S)
-{
-	Count++;//判断这个群中有几人
-	visited[S] = 1;
-	if (weight[S] > maxi) {
-		maxi = weight[S];
-		maxId = S;//最大权值的人的
-	}
-	for (int i = 0;i < cnt;i++) {
-		if (G[S][i] > 0) {
-			total += G[S][i];//总共的
-			if (!visited[i])
-				DFS(i);
-		}
-	}
-}
-```
 
 
 1072 Gas Station 30
