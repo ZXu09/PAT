@@ -31,7 +31,7 @@ else {
 }
 ```
 
-**二、DFS**
+## 二、DFS
 ### 1021 Deepest Root 25 -DFS(int S, int deep)
 -对每个结点进行DFS遍历，找到最大深度，比较简单
 ```C++
