@@ -247,7 +247,8 @@ void DFS(int vi)//传入有问题的地点
 - 边上存储distance和cost，找distance最小，相同则找cost最小，思路与1018一致，更加简单一些
 					       
 ### 1087 All Roads Lead to Rome 30 -DFS(int D)+Dijkstra(int S)
--
+- 边上存储cost，点上存储happiness，找cost最小，相同则找happiness最大，再相同则找平均happiness最大
+					       
 1018 Public Bike Management 30
 1030 Travel Plan 30
 1087 All Roads Lead to Rome 30
