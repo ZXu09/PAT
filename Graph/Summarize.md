@@ -249,10 +249,7 @@ void DFS(int vi)//传入有问题的地点
 ### 1087 All Roads Lead to Rome 30 -DFS(int D)+Dijkstra(int S)
 - 边上存储cost，点上存储happiness，找cost最小，相同则找happiness最大，再相同则找平均happiness最大
 					       
-1018 Public Bike Management 30
-1030 Travel Plan 30
-1087 All Roads Lead to Rome 30
-都是用Dijkstra和DFS来求解，是同类型的题，区别在与DFS的过程中找最优解的条件（一个是cost最小，一个是send单车最少，一个是happiness最多）
+
 
 
 
