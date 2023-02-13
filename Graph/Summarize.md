@@ -85,7 +85,6 @@ void DFS(int S)
 	}
 }
 ```
-
 ## 三、BFS
 ### 1076 Forwards on Weibo 30 -BFS(int S)
 看在对应层数的限制下订阅传播的最大值，存储的时候注意：`G[S][i] = 1;//i 订阅了 S`，方便找传播的人数（订阅他的人数）
@@ -118,6 +117,53 @@ int  BFS(Node S)
 		}
 	}
 	return cnt;
+}
+```
+### 1091 Acute Stroke 25 -int BFS(int x, int y, int z)
+- 三维BFS，巧妙利用三个数组实现对邻接点的访问
+```C++
+int X[6] = { 1, 0, 0, -1, 0, 0 };//便于DFS移动
+int Y[6] = { 0, 1, 0, 0, -1, 0 };
+int Z[6] = { 0, 0, 1, 0, 0, -1 };
+```
+judge(int x, int y, int z)判断是否是未访问过的肿瘤
+```C++
+bool judge(int x, int y, int z)//判断是否是未访问过的肿瘤
+{
+	if (x < 0 || x >= M || y < 0 || y >= N || z < 0 || z >= L)
+		return false;
+	if (arr[x][y][z] == 0 || visit[x][y][z] == true)
+		return false;
+	return true;
+}
+
+int BFS(int x, int y, int z)
+{
+	int cnt = 0;//计数判断是否>=T
+	Node temp;
+	temp.x = x, temp.y = y, temp.z = z;
+	queue<Node> q;
+	q.push(temp);
+	visit[x][y][z] = true;
+	while (!q.empty()) {
+		Node top = q.front();
+		q.pop();
+		cnt++;//计算volume
+		for (int i = 0; i < 6; i++) {//共计6个方位，恰好每个i对应一个方位
+			int tx = top.x + X[i];
+			int ty = top.y + Y[i];
+			int tz = top.z + Z[i];
+			if (judge(tx, ty, tz)) {//满足邻接点
+				visit[tx][ty][tz] = true;
+				temp.x = tx, temp.y = ty, temp.z = tz;
+				q.push(temp);//入队
+			}
+		}
+	}
+	if (cnt >= T)
+		return cnt;//返回volume
+	else
+		return 0;
 }
 ```
 ## 四、Dijkstra
@@ -253,17 +299,3 @@ void DFS(int vi)//传入有问题的地点
 
 
 
-1072 Gas Station 30
-从m个加油站里面选取1个站点，让他离居民区的最近的人最远，并且没有超出服务范围ds之内
-简而言之：找最大的Min，相同则最小的Ave，相同则最小的号码的加油站
-
-1076 Forwards on Weibo 30
-BFS的应用
-因为是给定人要找订阅他的人，题目的输入的格式是这个人订阅的人，因此存储时要用 谁订阅了他 来存储（反过来）
-
-1091 Acute Stroke
-三维BFS！！一共有6个方向进行移动，遍历i = 1 ~ 6，分别加上对应X、Y、Z数组的值
-int X[6] = { 1, 0, 0, -1, 0, 0 };
-int Y[6] = { 0, 1, 0, 0, -1, 0 };
-int Z[6] = { 0, 0, 1, 0, 0, -1 };
-judge判断是否邻接点且未访问
