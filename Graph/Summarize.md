@@ -33,7 +33,8 @@ else {
 
 ## 二、DFS
 ### 1021 Deepest Root 25 -DFS(int S, int deep)
--对每个结点进行DFS遍历，找到最大深度，比较简单
+- 注意这种传入deep参数的DFS十分常见
+- 对每个结点进行DFS遍历，找到最大深度，比较简单
 ```C++
 void DFS(int S, int deep)//dfs找到最大深度
 {
@@ -50,7 +51,25 @@ void DFS(int S, int deep)//dfs找到最大深度
 	}
 }
 ```
+### 1094 The Largest Generation 25 -DFS(int S, int level)
+```C++
+struct Node
+{
+	vector<int>v;//存储下一层的结点
+	int level;
+}family[110];
 
+void DFS(int S, int level)
+{
+	family[S].level = level;
+	if (level > maxlevel)
+		maxlevel = level;
+	Level[level]++;//对应层数的结点数+1
+	for (int i = 0;i < family[S].v.size();i++) {
+		DFS(family[S].v[i], level + 1);
+	}
+}
+```
 ### 1034 Head of a Gang 30 -DFS()
 - 姓名string->int：map<string, int> m;
 - int->string：vector<string> ss; ss.push_back(S1);
@@ -68,6 +87,8 @@ void GetAns()
 		}
 	}
 }
+```
+```C++
 void DFS(int S)
 {
 	Count++;//判断这个群中有几人
