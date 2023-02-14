@@ -70,6 +70,9 @@ void DFS(int S, int level)
 	}
 }
 ```
+### 1004 Counting Leaves 30 -DFS(int S, int level)
+- 与1094思路一模一样，多了一个判断是否是叶子结点
+
 ### 1034 Head of a Gang 30 -DFS()
 - 姓名string->int：map<string, int> m;
 - int->string：vector<string> ss; ss.push_back(S1);
