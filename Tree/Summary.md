@@ -1,9 +1,5 @@
-### 1004 Counting Leaves 30
-利用  `Father[ID_i] = ID;`记忆结点之间的父子关系，再统计level
-
-***
 **Traversal**
-通过两个如前序和中序的序列求另一个序列
+- 通过两个如前序和中序的序列求另一个序列
 ### 1020 Tree Traversals 25
 postorder and inorder -> level order后序中序输出层序
  1. `solve(int PreL, int InL, int PostL, int L, int index);`递归得到前序并记录index
