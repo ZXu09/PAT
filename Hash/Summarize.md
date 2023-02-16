@@ -1,3 +1,17 @@
+### 1002 A+B for Polynomials
+存储对应指数下的底数即可，在输入时即相加
+```
+double p[1001] = { 0.0 };//存储对应指数下的底数值
+int a;
+double b;
+cin >> a >> b;//指数和底数b^a
+if (p[a] == 0)//未存储过
+	p[a] = b;
+else
+	p[a] += b;
+```
+
+
 1022 
 用title、author、publisher、key、publishyear查找ID
 1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
