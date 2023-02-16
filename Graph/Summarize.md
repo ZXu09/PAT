@@ -43,6 +43,16 @@ for (int i = 0; i < K - 1; i++)
 		flag = false;
 ```
 ## 二、DFS
+### 1126 Eulerian Path 25 -DFS(int S)
+- DFS的用法->判断图是否连通
+```C++
+DFS(0);
+for (int i = 0;i < N;i++) {
+	if (!visited[i])
+		flag = false;//不连通
+
+}
+```
 ### 1021 Deepest Root 25 -DFS(int S, int deep)
 - 注意这种传入deep参数的DFS十分常见
 - 对每个结点进行DFS遍历，找到最大深度，比较简单
