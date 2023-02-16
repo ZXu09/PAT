@@ -32,6 +32,8 @@ else {
 ```
 ### 1122 Hamiltonian Cycle 25 判断无重复环-set的应用
 ```C++
+vector<int>v;//向量
+set<int>s;//不重复
 if (s.size() != N || K - 1 != N)//不满足全部顶点和无重复结点
 	flag = false;
 if (v[0] != v[K - 1])//不满足环
