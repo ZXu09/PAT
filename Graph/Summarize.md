@@ -1,5 +1,5 @@
-## 一、输入
-### Graph中的string
+## 一、其他类型
+### Graph中的string-输入内容
 1. string中无数字类型如"AAA"
 ```C++
 map<string, int> m;//实现string->int(key:string, value:int)
@@ -30,7 +30,16 @@ else {
 	else s1 = N + S1[1] - '0';
 }
 ```
-
+### 1122 Hamiltonian Cycle 25 判断无重复环-set的应用
+```C++
+if (s.size() != N || K - 1 != N)//不满足全部顶点和无重复结点
+	flag = false;
+if (v[0] != v[K - 1])//不满足环
+	flag = false;
+for (int i = 0; i < K - 1; i++)
+	if (G[v[i]][v[i + 1]] == 0) 
+		flag = false;
+```
 ## 二、DFS
 ### 1021 Deepest Root 25 -DFS(int S, int deep)
 - 注意这种传入deep参数的DFS十分常见
