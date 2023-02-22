@@ -18,7 +18,7 @@ sprintf(ans, "%d", a + b);//PAT
 **char->int**（单个字符类型，string a, a[i]同理）
 ```C++
 char Num[101];
-Sum += (Num[i]-'0');
+Sum += (Num[i]-'0');//ASCII-48
 ```
 
 **strlen()**
