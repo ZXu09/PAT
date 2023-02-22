@@ -57,6 +57,21 @@ else {
 	}
 }
 ```
+
+### 1039 Course List for Student
+与上题一致的思路，记录每个学生(key)对应的课程id(value)，id不重复且自动排序
+```C++
+#include<set>
+#include<map>
+map<string, set<int>>mp;
+for (int i = 0;i < K;i++) {
+		cin >> id >> Ni;
+		for (int j = 0;j < Ni;j++) {
+			cin >> s;
+			mp[s].insert(id);
+		}
+}
+```
 1022 
 用title、author、publisher、key、publishyear查找ID
 1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
