@@ -58,7 +58,7 @@ else {
 }
 ```
 
-### 1039 Course List for Student
+### 1039 Course List for Student 25
 与上题一致的思路，记录每个学生(key)对应的课程id(value)，id不重复且自动排序
 ```C++
 #include<set>
