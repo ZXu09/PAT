@@ -87,6 +87,17 @@ map<int, vector<string>>mp;//key:id,value:student
 sort(mp[i].begin(), mp[i].end());//对每个课程进行sort
 ```
 
+### 1054 The Dominant Color 20
+strictly dominant color：占据超过一半的数量的颜色，题目保证存在
+```C++
+int tmp;
+cin >> tmp;
+m[tmp]++;
+if (m[tmp] > Max) {
+	Max = m[tmp];
+	MaxID = tmp;
+}
+```
 1022 
 用title、author、publisher、key、publishyear查找ID
 1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
