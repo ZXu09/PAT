@@ -1,6 +1,6 @@
 ### 1002 A+B for Polynomials
 存储对应指数下的底数即可，在输入时即相加
-```
+```C++
 double p[1001] = { 0.0 };//存储对应指数下的底数值
 int a;
 double b;
@@ -10,7 +10,19 @@ if (p[a] == 0)//未存储过
 else
 	p[a] += b;
 ```
-
+```C++
+double p[1001] = { 0.0 };//存储第一次输入
+double r[2001] = { 0.0 };//存储结果
+cin >> a >> b;//指数和底数b^a
+for (j = 0;j < 1001;j++) {//遍历第一次输入，因为可能产生新的指数，故要遍历
+	if (p[j] != 0) {
+		if(r[j + a] == 0)//未存储过，存储底数相乘，指数相加
+			r[j + a] = p[j] * b;
+		else
+			r[j + a] += p[j] * b;
+	}
+}
+```
 
 1022 
 用title、author、publisher、key、publishyear查找ID
