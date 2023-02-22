@@ -34,6 +34,11 @@ int len = strlen(ans);
 string s;
 int b = atoi(s.c_str());
 ```
+### string函数
+**substr()函数**
+```C++
+key = key.substr(3);//从第三位到末尾复制
+```
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
