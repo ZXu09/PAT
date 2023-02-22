@@ -26,6 +26,37 @@ for (j = 0;j < 1001;j++) {//遍历第一次输入，因为可能产生新的指�
 }
 ```
 
+### 1022 Digital Library 30
+
+一本书：输入多个key值，对应一个value：ID（需要自动排序，且不能重复）
+
+输入多本书时每个key值对应多个ID值，在query时输出这些ID值
+```C++
+string id, title, author, publisher, publishyear, key;//共有5个Key值
+//ID值形如1111111、2222222
+map<string, set<string>> mp;//key, value 对value值也就是ID进行排序
+mp[title].insert(id);
+mp[author].insert(id);
+//key words
+while (cin >> key) {//对于每一个key值进行保存
+	char c = getchar();//输入空格
+	mp[key].insert(id);
+	if (c == '\n')break;//key值输入结束
+}
+mp[publisher].insert(id);
+mp[publishyear].insert(id);
+```
+map类型的遍历方法：
+```C++
+if (mp[key].size() == 0) {//没找到
+	cout << "Not Found" << endl;
+}
+else {
+	for (auto it : mp[key]) {//采取auto类型+ 增强for 循环(auto迭代)
+	cout << it << endl;
+	}
+}
+```
 1022 
 用title、author、publisher、key、publishyear查找ID
 1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
