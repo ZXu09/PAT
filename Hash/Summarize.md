@@ -59,11 +59,13 @@ else {
 ```
 
 ### 1039 Course List for Student 25
+输入不同课程有那些同学选择，按顺序输出不同同学的选课内容
+
 与上题一致的思路，记录每个学生(key)对应的课程id(value)，id不重复且自动排序
 ```C++
 #include<set>
 #include<map>
-map<string, set<int>>mp;
+map<string, set<int>>mp;//key:student,value:id
 for (int i = 0;i < K;i++) {
 		cin >> id >> Ni;
 		for (int j = 0;j < Ni;j++) {
@@ -72,6 +74,19 @@ for (int i = 0;i < K;i++) {
 		}
 }
 ```
+
+### 1047 Student List for Course 25
+输入不同同学选课的课程信息，按照顺序输出不同课程有哪些同学选择
+
+本来按照1039的思路写：
+`map<int, set<string>>mp;`
+发现最后一个测试点过不去
+改为：
+```C++
+map<int, vector<string>>mp;//key:id,value:student
+sort(mp[i].begin(), mp[i].end());//对每个课程进行sort
+```
+
 1022 
 用title、author、publisher、key、publishyear查找ID
 1.unordered_map<string, set<string>> mp;//key, value 对value值也就是id进行排序
