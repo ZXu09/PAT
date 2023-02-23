@@ -55,6 +55,47 @@ for (int i = 0;i < l.size()-1;i++) {
 }
 ```
 
+### 1074 Reversing Linked List 25
+**逆转链表**，给定K，要求每K个结点逆转，如：
+
+given L being 1→2→3→4→5→6, if K=3, then you must output 3→2→1→6→5→4;
+```C++
+struct Node
+{
+	int Next;
+	int Data;
+}Array[maxn];
+
+bool flag = true;//判断是否是第一个结点
+int NextHead = Ad, LastEnd = -1;//头结点与尾结点
+int Head;
+//根据不断更新Ptr1、Ptr2进行链表逆转
+while (Count >= K) {//满足逆转的条件
+	int Ptr1 = NextHead;
+	int Ptr2 = Array[Ptr1].Next;
+	for (int i = 0;i < K - 1 ;i++) {
+		int Ptr3 = Array[Ptr2].Next;//先存储Ptr2的Next，否则会丢掉
+		Array[Ptr2].Next = Ptr1;
+		Ptr1 = Ptr2;
+		Ptr2 = Ptr3;
+	}
+	//4→3→2→1→5→6，1接到5上的情况（不用逆转的起始位置）
+	Array[NextHead].Next = Ptr2;//假定之后不需要修改，直接接到下一轮的起始
+	if (flag) {
+		Head = Ptr1;
+		flag = false;
+	}
+	else {
+		//3→2→1→6→5→4，1接到6上的情况（逆转之后的起始位置）
+		Array[LastEnd].Next = Ptr1;//更新一下
+	}
+	//NextHead一开始是头结点，逆转之后变为尾结点
+	LastEnd = NextHead;//更新尾结点
+	NextHead = Ptr2;//更新头结点
+	Count -= K;
+}
+```
+
 
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
