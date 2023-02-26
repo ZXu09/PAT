@@ -142,6 +142,35 @@ void DFS(int S, int deep)
 	}
 }
 ```
+
+### 1097 Deduplication on a Linked List 25
+given L being 21→-15→-15→-7→15, you must output 21→-15→-7, and the removed list -15→15.
+
+node：`Address Key Next`
+```C++
+struct Node
+{
+	int add;
+	int data;
+	int next;
+}Array[maxn];
+```
+```C++
+vector<Node>res, rem;//分别是移除后的链表和被移除的链表
+vector<int>tmp;//存储出现过的字符
+//Address一开始是头结点
+while (Address != -1) {
+	if (find(tmp.begin(), tmp.end(), abs(Array[Address].data)) != tmp.end()) {
+		//已经存过了
+		rem.push_back(Array[Address]);
+	}
+	else {
+		tmp.push_back(abs(Array[Address].data));//未存储就存储
+		res.push_back(Array[Address]);
+	}
+	Address = Array[Address].next;
+}
+```
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
