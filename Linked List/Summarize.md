@@ -96,10 +96,39 @@ while (Count >= K) {//满足逆转的条件
 }
 ```
 
+### 1097 Deduplication on a Linked List 25
+given L being 21→-15→-15→-7→15, you must output 21→-15→-7, and the removed list -15→15.
+
+node：`Address Key Next`
+```C++
+struct Node
+{
+	int add;
+	int data;
+	int next;
+}Array[maxn];
+```
+```C++
+vector<Node>res, rem;//分别是移除后的链表和被移除的链表
+vector<int>tmp;//存储出现过的字符
+//Address一开始是头结点
+while (Address != -1) {
+	if (find(tmp.begin(), tmp.end(), abs(Array[Address].data)) != tmp.end()) {
+		//已经存过了
+		rem.push_back(Array[Address]);
+	}
+	else {
+		tmp.push_back(abs(Array[Address].data));//未存储就存储
+		res.push_back(Array[Address]);
+	}
+	Address = Array[Address].next;
+}
+```
+
 ### 1079 Total Sales of Supply Chain 25
 题目大意：给一棵树，在树根出货物的价格为p，然后从根结点开始每往下走一层，该层的货物价格将会在父亲结点的价格上增加r%，给出每个叶结点的货物量，求他们的价格之和
 
-第i层：Ki​ ID[1] ID[2] ... ID[Ki​]
+第i层：Ki ID[1] ID[2] ... ID[Ki​]
 - 若Ki不为0，则后面的为儿子节点，若Ki为0，则后面的数字表示当前叶子结点的数目
 ```C++
 struct Node
@@ -143,34 +172,7 @@ void DFS(int S, int deep)
 }
 ```
 
-### 1097 Deduplication on a Linked List 25
-given L being 21→-15→-15→-7→15, you must output 21→-15→-7, and the removed list -15→15.
 
-node：`Address Key Next`
-```C++
-struct Node
-{
-	int add;
-	int data;
-	int next;
-}Array[maxn];
-```
-```C++
-vector<Node>res, rem;//分别是移除后的链表和被移除的链表
-vector<int>tmp;//存储出现过的字符
-//Address一开始是头结点
-while (Address != -1) {
-	if (find(tmp.begin(), tmp.end(), abs(Array[Address].data)) != tmp.end()) {
-		//已经存过了
-		rem.push_back(Array[Address]);
-	}
-	else {
-		tmp.push_back(abs(Array[Address].data));//未存储就存储
-		res.push_back(Array[Address]);
-	}
-	Address = Array[Address].next;
-}
-```
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
