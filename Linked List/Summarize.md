@@ -128,7 +128,7 @@ while (Address != -1) {
 ### 1079 Total Sales of Supply Chain 25
 题目大意：给一棵树，在树根出货物的价格为p，然后从根结点开始每往下走一层，该层的货物价格将会在父亲结点的价格上增加r%，给出每个叶结点的货物量，求他们的价格之和
 
-第i层：Ki ID[1] ID[2] ... ID[Ki​]
+第i层：Ki ID[1] ID[2] ... ID[Ki]
 - 若Ki不为0，则后面的为儿子节点，若Ki为0，则后面的数字表示当前叶子结点的数目
 ```C++
 struct Node
@@ -172,6 +172,27 @@ void DFS(int S, int deep)
 }
 ```
 
+### 1106 Lowest Price in Supply Chain 25
+与1079类似，Ki ID[1] ID[2] ... ID[Ki]
+
+给儿子节点，找最便宜的价格以及路线条数
+```C++
+void DFS(int S, int deep)
+{
+	if (v[S].size() == 0) {//零售商
+		if (deep < maxdeep) {
+			cnt = 1;
+			maxdeep = deep;
+		}
+		else if (deep == maxdeep)
+			cnt++;
+		return;
+	}
+	for (int i = 0;i < v[S].size();i++) {
+		DFS(v[S][i], deep + 1);
+	}
+}
+```
 
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
