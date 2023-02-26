@@ -121,6 +121,27 @@ void DFS(int index, int depth)
 		DFS(v[index].child[i], depth + 1);
 }
 ```
+
+### 1090 Highest Price in Supply Chain 25
+与1079类似，1079给儿子结点，这题给该结点的父亲结点
+若为-1，则为根节点（没有父结点），统计最高价格（最长路径）以及其条数。
+```C++
+void DFS(int S, int deep)
+{
+	if (v[S].size() == 0) {
+		if (deep > length) {
+			num = 1;
+			length = deep;//记录深度
+		}
+		else if (deep == length) {
+			num++;//统计数目
+		}
+	}
+	for (int i = 0;i < v[S].size();i++) {
+		DFS(v[S][i], deep + 1);
+	}
+}
+```
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
