@@ -96,7 +96,31 @@ while (Count >= K) {//满足逆转的条件
 }
 ```
 
+### 1079 Total Sales of Supply Chain 25
+题目大意：给一棵树，在树根出货物的价格为p，然后从根结点开始每往下走一层，该层的货物价格将会在父亲结点的价格上增加r%，给出每个叶结点的货物量，求他们的价格之和
 
+第i层：Ki​ ID[1] ID[2] ... ID[Ki​]
+- 若Ki不为0，则后面的为儿子节点，若Ki为0，则后面的数字表示当前叶子结点的数目
+```C++
+struct Node
+{
+	int data;//存储叶子结点的个数
+	vector<int>child;//存储儿子结点
+};
+```
+```C++
+//pow()计算n层对应的价格(1+r)^n * P
+double cnt = 0.0;//cnt要是double类型
+void DFS(int index, int depth)
+{
+	if (v[index].child.size() == 0) {//叶子结点
+		cnt += v[index].data * P * pow(1 + r, depth);
+		return;
+	}
+	for (int i = 0;i < v[index].child.size();i++)
+		DFS(v[index].child[i], depth + 1);
+}
+```
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
