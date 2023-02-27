@@ -194,6 +194,60 @@ void DFS(int S, int deep)
 }
 ```
 
+### 1114 Family Property 25
+**并查集**
+
+一个有房产的人的信息：
+
+`ID Father Mother k Child1​⋯Childk​ Mestate​ Area`
+- first print in a line the number of families
+- then output the family info in the format:
+`ID MAVGsets​ AVGarea​`
+ `ID` is the smallest ID in the family
+```C++
+struct Node//有房产的人
+{
+	int ID, Father, Mother, M, area;
+	vector<int>child;
+}fam[1010];
+
+struct ANode//本质上只需要存每个家庭对应的根节点
+{
+	int ID, Person;
+	double Sum, area;
+	bool flag = false;//是不是根节点
+}ans[10000];
+```
+```C++
+int father[10000];//实现并查集
+bool visited[10000] = {false};//统计人数
+int find(int x)//找到没有父结点的那个结点
+{
+	while (x != father[x]) {
+		x = father[x];
+	}
+	return x;
+}
+void Union(int a, int b)//使得ID最小的结点成为根节点
+{
+	int fa = find(a);
+	int fb = find(b);
+	if (fa > fb)
+		father[fa] = fb;
+	else if (fa < fb)
+		father[fb] = fa;
+}
+//通过Union()实现一个家庭的绑定
+Union(fam[i].Father, fam[i].ID);
+//注意人数的统计，有部分人没有房子不在fam[i].ID中
+for (int i = 0;i < 10000;i++) {
+	if(visited[i])//这样就不会漏了没有房子的人
+		ans[find(i)].Person++;
+	if (ans[i].flag)//每个家庭的根节点
+		cnt++;//the number of families
+}
+```
+ 
 1074 Reversing Linked List
 用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
 很优雅的解法
