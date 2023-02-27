@@ -55,6 +55,56 @@ long long int GetRadix(long long int Num1, string N2, long long int left, long l
 	return 0;//left>right
 }
 ```
+
+### 1014 Waiting in Line 30
+N个窗口，对应N条黄线，黄线之前可以站M个人，第N*M+1个人要站在黄线外。
+- 选择队伍时选择最短的，相同选择序号小的
+```C++
+int time(int h, int m)//转换成为分钟
+{
+	return 60 * h + m;
+}
+struct Window//每个窗口的时间
+{
+	//队伍的最后的人服务完成花费的总时间,用于计算服务耗费时间
+	int endtime = time(8, 0);
+	//队首的人服务的结束时间,队首服务时间最短的(最快有缺口的)即为入队选择的窗口
+	int poptime = endtime;
+	queue<int>q;
+}window[20];
+```
+```C++
+int spenttime[1001] = {0};//服务耗费时间，用于输入
+int finishtime[1001] = {0};//服务结束时间
+//队伍满之前入队
+int idx = 0;//序号，第几个人
+for (i = 0;i < min(N * M, K);i++) {
+	window[idx % N].q.push(idx);//第idx % N个窗口入队idx这个人
+	window[idx % N].endtime += spenttime[idx];
+	if (idx < N)//此时窗口还没满
+		window[idx].poptime = spenttime[idx];
+	finishtime[idx] = window[idx % N].endtime;
+	idx++;
+}
+while (idx < K) {
+	//寻找poptime最小的队伍
+	int inx = -1, minpoptime = INF;
+	for (i = 0;i < N;i++) {
+		if (window[i].poptime < minpoptime) {
+			inx = i;
+			minpoptime = window[i].poptime;
+		}
+	}
+	window[inx].q.pop();//队首元素出队
+	window[inx].q.push(idx);//入队
+
+	window[inx].endtime += spenttime[idx];
+	window[inx].poptime += spenttime[window[inx].q.front()];
+	//队首的人服务花费的时间,作为之后的人的比较因此还要把之前的也加上
+	finishtime[idx] = window[inx].endtime;
+	idx++;
+}
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
