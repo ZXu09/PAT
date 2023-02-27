@@ -1,3 +1,60 @@
+## 进制转换
+### 1010 Radix 25
+**Radix 基数（进制数）**
+N1 and N2, your task is to find the radix of one number while that of the other is given.
+1. 假定N1已知进制，转换为10进制Num1(方便比较)
+2. 找到N2最小的可能进制**(GetMinRadix(N2), Num1 + 1)**;**Num1 + 1**表示N1最大的进制。进制越大，数值越小，假设两个数字都是6，假设进制范围就是(7,7)
+3. 在N2的进制范围内，转换成10进制进行比较
+```C++
+//将radix进制的数转化为10进制的数radix^n+...+radix^0(n为个位、百位...)
+long long int GetNum(string N1, long long int radix)
+{
+	long long int sum = 0;
+	for (int i = 0;i < N1.length();i++) {
+		if (N1[i] <= '9') {
+			sum = sum * radix + (N1[i] - '0');
+		}
+		else if (N1[i] <= 'z') {
+			sum = sum * radix + (N1[i] - 'a' + 10);
+		}
+	}
+	return sum;
+}
+//找到N2最小的基数
+int GetMinRadix(string N2)
+{
+	char max = '0';
+	for (int i = 0;i < N2.length();i++) {
+		if (N2[i] > max)//ASCII码比较
+			max = N2[i];
+	}
+	if (max <= '9')
+		return max - '0' + 1;//0-9就是10进制
+	else if (max <= 'z')
+		return max - 'a' + 11;//算上0-9
+}
+//找到满足使N2==N1的基数--二分法
+long long int GetRadix(long long int Num1, string N2, long long int left, long long int right)
+{
+	if (left == right) {
+		if (GetNum(N2, left) == Num1)
+			return left;
+		else
+			return 0;//没有找到
+	}
+	else if (left < right) {
+		long long int center = (left + right) / 2;
+		if (GetNum(N2, center) == Num1)
+			return center;
+		//Num2>Num1或者Num2<0（溢出） 就大了
+		else if (GetNum(N2, center) > Num1||GetNum(N2,center)<0)
+			return GetRadix(Num1, N2, left, center);
+		else if (GetNum(N2, center) < Num1)
+			return GetRadix(Num1, N2, center + 1, right);
+	}
+	return 0;//left>right
+}
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
