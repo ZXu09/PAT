@@ -248,28 +248,42 @@ for (int i = 0;i < 10000;i++) {
 }
 ```
  
-1074 Reversing Linked List
-用Ptr1、Ptr2、Ptr3进行逆转，并用NextHead、LastEnd存储
-很优雅的解法
+### 1118 Birds in Forest 25
+**并查集**
 
-1114 Family Property
-并查集
-int find(int x)//找到没有父结点的那个结点
+birds appear in the same picture belong to the same tree.
+1. count the maximum number of trees in the forest
+2. for any pair of birds, tell if they are on the same tree.
+each describes a picture in the format:
+
+`K B1 B2 ... BK`
+输出最多有多少树以及鸟的数量
+```C++
+int root[10010];//实现并查集
+bool node[10010];//判断鸟的数量
+int find(int x)
 {
-	while (x != father[x]) {
-		x = father[x];
+	while (x != root[x]) {
+		x = root[x];
 	}
 	return x;
 }
-void Union(int a, int b)//使得ID最小的结点成为根节点
-{
-	int fa = find(a);
-	int fb = find(b);
-	if (fa > fb)
-		father[fa] = fb;
-	else if (fa < fb)
-		father[fb] = fa;
-}
 
-1118 Birds in Forest
-同理并查集
+void Union(int a, int b)//以小的为根节点
+{
+	int ra = find(a);
+	int rb = find(b);
+	if (ra < rb) {
+		root[rb] = ra;
+	}
+	else if (ra > rb)
+		root[ra] = rb;
+}
+Union(tmpB, lastB);//实现并查集
+set<int>s;
+int tree = find(i);
+s.insert(tree);//set实现几棵树
+if (find(Q1) == find(Q2))//并查集实现是否在同一颗树上
+	printf("Yes\n");
+else printf("No\n");
+```
