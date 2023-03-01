@@ -152,6 +152,108 @@ for (int i = 0;i < cnt;i++) {
 }
 printf("%.1f\n", (total / 60.0) / cnt * 1.0);//计算结果
 ```
+
+### 1026 Table Tennis 30
+N个桌子(1-N)，当一对人来时，若有空桌子，选择最小的序号的，桌子被占满时，在队列中等待，最多能玩2小时。
+
+存在VIP桌子：若有VIP在等待，则直接使用，若无VIP在队列中，则正常使用
+
+输出每个人的到达时间、服务时间、等待时间（chronological order of the serving time按照服务时间升序排序，The waiting time must be rounded up to an integer minutes四舍五入），以及每个桌子招待的人数。
+**%d, (int)round(a)等价于 %.0f, a**
+```C++
+#define begin 28800//开始的时间8*60*60
+#define end 75600//结束的时间21*60*60
+struct Person
+{
+	int arrive = begin;//到达时间
+	float wait = 0;//等待时间
+	int serve = 0;//服务时间
+	int play = 0;//训练时间
+	int tag = 0;//是否是VIP
+	bool served = false;//是否被服务过
+}p[10001];
+struct table
+{
+	int poptime = begin;//空闲时间，也就是当前人的服务结束时间
+	int count = 0;//接待人数
+	bool vip;
+};
+vector<table> tables;
+tables.resize(K + 1);//初始化容量
+```
+```C++
+int FindNextVIP(int vip_id) //查询队伍中第一个没有被服务的VIP
+{
+	vip_id++;
+	while (vip_id < N && !p[vip_id].tag)
+		vip_id++;
+	return vip_id >= N ? 0 : vip_id;
+}
+void alloc(int id, int table_id)//为第id个人分配桌子
+{
+	if (tables[table_id].poptime <= p[id].arrive)//不需要等待
+		p[id].serve = p[id].arrive;//服务时间与到达时间一致
+	else
+		p[id].serve = tables[table_id].poptime;//服务时间与桌子的空闲时间一致
+	tables[table_id].poptime = p[id].serve + p[id].play;//服务结束时间=服务时间+训练时间
+	tables[table_id].count++;//接待过的人+1
+	p[id].wait = round((p[id].serve - p[id].arrive) / 60.0);//等待时间->四舍五入取分钟
+	p[id].served = true;
+}
+```
+```C++
+sort(p, p + N, cmp1);//按照到来的时间进行排序
+int vip_id = FindNextVIP(-1);//找到VIP所在的位置
+i = 0;
+while (i < N) {
+    if (p[i].served) {//找到未被服务的人
+        i++;
+        continue;//以这种方式跳过已经服务过的VIP用户
+    }
+    int min_table_id = -1;//空闲且编号最小的桌子
+    int min = 0x3f3f3f;//最短的空闲时间
+    for (int j = 1;j <= K;j++) {//遍历所有桌子找到短等待时长的桌子
+        if (tables[j].poptime < min) {
+            min = tables[j].poptime;
+            min_table_id = j;
+        }
+        if (tables[j].poptime <= p[i].arrive) {//存在空闲的桌子
+            min_table_id = j;
+            break;
+        }
+    }
+    if (tables[min_table_id].poptime >= end || p[i].arrive >= end)
+        break;//排队结束
+    if (p[i].tag == 1) {//是VIP的情况
+        int vip_table_id = -1;//vip桌子中空闲且序号最小
+        for (int j = 1;j <= K;j++) {//查找是否有空闲的VIP桌子
+            if (tables[j].vip && tables[j].poptime <= p[i].arrive) {//若存在空闲桌子，取序号最小的那个
+                vip_table_id = j;
+                break;
+            }
+        }
+        if (i == vip_id)
+            vip_id = FindNextVIP(vip_id);//更新下一个VIP的位置
+        if (vip_table_id == -1) {//没有VIP，只能分配普通桌子
+            alloc(i++, min_table_id);
+        }
+        else {
+            alloc(i++, vip_table_id);
+        }
+    }//不是VIP的情况
+    else {
+        if (tables[min_table_id].vip) {//是VIP桌子
+            if (!p[vip_id].serve && p[vip_id].arrive <= tables[min_table_id].poptime) {
+                //有VIP用户还没被服务且该VIP入队的时候桌子还未空闲
+                alloc(vip_id, min_table_id);
+                vip_id = FindNextVIP(vip_id);
+                continue;
+            }
+        }
+        alloc(i++, min_table_id);//分配给该用户
+    }
+}
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
