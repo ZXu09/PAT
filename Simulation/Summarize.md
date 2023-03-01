@@ -6,7 +6,7 @@ N1 and N2, your task is to find the radix of one number while that of the other 
 2. 找到N2最小的可能进制**(GetMinRadix(N2), Num1 + 1)**;**Num1 + 1**表示N1最大的进制。进制越大，数值越小，假设两个数字都是6，假设进制范围就是(7,7)
 3. 在N2的进制范围内，转换成10进制进行比较
 ```C++
-//将radix进制的数转化为10进制的数radix^n+...+radix^0(n为个位、百位...)
+//将radix进制的数转化为10进制的数N1[0]*radix^n-1 + ... + N1[n-1]*radix^0(n为个位、百位...)
 long long int GetNum(string N1, long long int radix)
 {
 	long long int sum = 0;
