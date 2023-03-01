@@ -55,7 +55,20 @@ long long int GetRadix(long long int Num1, string N2, long long int left, long l
 	return 0;//left>right
 }
 ```
-
+### 1019 General Palindromic Number 20
+将10进制的数转化为对应radix进制
+```C++
+int Num[10];
+int i = 0;
+//辗转相除法
+void Transform(int N, int b)//注意此时的N是倒着的，比如121->5进制是 4 4 1，transform后是 1 4 4
+{
+	while (N > 0) {
+		Num[i++] = N % b;
+		N /= b;
+	}
+}
+```
 ### 1014 Waiting in Line 30
 N个窗口，对应N条黄线，黄线之前可以站M个人，第N*M+1个人要站在黄线外。
 - 选择队伍时选择最短的，相同选择序号小的
