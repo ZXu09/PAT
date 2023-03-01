@@ -105,6 +105,36 @@ while (idx < K) {
 	idx++;
 }
 ```
+### 1017 Queueing at Bank 25
+**优先队列**
+
+类似1014，N个窗口，所有人都呆在一根黄线之外（黄线内容纳1人）
+```C++
+#include<queue>
+struct person
+{
+	int come;//来的时间
+	int time;//等待的时间
+}p[maxn];
+sort(p, p + cnt, cmp);//按照到达银行的时间进行排序
+priority_queue<int, vector<int>, greater<int>>q;//按照升序排序的优先队列
+for (int i = 0;i < K;i++) {
+	q.push(begin);//将每个窗口的起始值入队
+}
+int total = 0;//总等待秒数
+for (int i = 0;i < cnt;i++) {
+	if (p[i].come < q.top()) {//来的比队首结束服务的时间要早-等待
+		total += (q.top() - p[i].come);//等待的时间
+		q.push(q.top() + p[i].time);//将该人完成服务的时间入队
+		q.pop();//队首出队
+	}
+	else {//来的比队首结束服务的时间要晚-不用等待
+		q.push(p[i].come + p[i].time);//直接办理业务，入队
+		q.pop();//队首出队
+	}
+}
+printf("%.1f\n", (total / 60.0) / cnt * 1.0);//计算结果
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
