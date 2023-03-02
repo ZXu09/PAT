@@ -263,6 +263,40 @@ while (i < N) {
     }
 }
 ```
+
+### 1049 Counting Ones 30
+给定正整数N，统计1-N之中所有1的数量，如12, 1-12共有5个1 ： 1, 10, 11, and 12.
+```C++
+int CountOnes(int N)
+{
+	int count = 0;
+	int factor = 1;//个位开始
+	int higher, lower, cur;
+	while (N / factor != 0) {
+		higher = N / (factor * 10);//当前位的高位
+		lower = N - (N / factor) * factor;//当前位的低位
+		cur = (N / factor) % 10;//当前位
+		switch (cur) {
+		case 0://当前位为0，当前位的1数量仅由高位决定，因为该位到不了1
+            //如100，个位是0，1的数量为10*1=10(1、11...91)，十位是0，1的数量为1*10=10仅仅依靠factor的数量(10、11...19)
+            //如1000，个位的1的数量为100*1(1、11...91 + 101、111...191 + 一组10个共10组)
+			count += higher * factor;
+			break;
+		case 1://当前位为1，当前位的1数量由高位和低位+1决定
+            //理解了上面的这个就很好理解，就是多了低位的1罢了。
+            //若低位存在比如5，则低位可贡献6个：10-15
+            //若为低位不存在比如111的个位，则+ 1的对应1、(101、11、21...91)
+			count += higher * factor + lower + 1;
+			break;
+		default://当前位大于1，当前位的1数量由高位+1决定，这里的1对应高位为0的情况
+            //若为12，个位的1的数量为2：1、11；120的十位1的个数为20：1(0-9)、11(0-9)
+			count += (higher + 1) * factor;
+		}
+		factor = factor * 10;
+	}
+	return count;
+}
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
