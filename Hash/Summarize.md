@@ -87,6 +87,27 @@ map<int, vector<string>>mp;//key:id,value:student
 sort(mp[i].begin(), mp[i].end());//对每个课程进行sort
 ```
 
+### 1048 Find Coins 25
+给出n个正整数和一个正整数m，问n个数字中是否存在一对数字a和b(a <= b),使a+b=m成立。如果有多个，输出a最小的那一对。
+
+**建立数组a保存每个数字出现的次数，然后判断输出**
+```C++
+for(int i = 0; i < n; i++) {    
+	scanf("%d", &temp);    
+	a[temp]++;
+}
+for(int i = 0; i < 1001; i++) {
+    if(a[i]) {
+        a[i]--;//要先a[i]--，表示已经使用了一个，否则若只有1个4，要8的时候也会输出
+        if(m > i && a[m-i]) {
+            printf("%d %d", i, m - i);
+            return 0;
+        }
+        a[i]++;
+    }
+}
+```
+
 ### 1054 The Dominant Color 20
 strictly dominant color：占据超过一半的数量的颜色，题目保证存在
 ```C++
