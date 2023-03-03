@@ -43,7 +43,13 @@ key = key.substr(3);//从第三位到末尾复制
 **compare()函数**
 
 如果相等则输出为0，不等则输出为-1。
-`str1.compare(str2);`
+```C++
+str1.compare(str2);
+```
+也可以直接用!=, 相等则输出为0，不等则输出为1
+```C++
+if(str1!=str2)
+```
 
 
 int a,b;
