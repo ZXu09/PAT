@@ -81,6 +81,59 @@ for (i = 0; i < N - 1; i++) {
 }
 ```
 
+### 1025 PAT Ranking 25
+N：测试场地，对于每个测试场地都有K个人以ID, scores的形式
+
+输出：所有参赛者的数量，然后输出最终的排名，若排名一致，按照ID顺序输出：
+
+`registration_number final_rank location_number local_rank`,
+```C++
+struct Person
+{
+	string ID;
+	int score;
+	int rank;
+	int location;
+	int lrank;
+}person[30001];
+
+bool cmp(Person a,Person b)
+{
+	if (a.score != b.score)
+		return a.score > b.score;
+	else if (a.ID != b.ID)
+		return (a.ID < b.ID);
+}
+```
+```C++
+for (int i = 1;i <= N;i++) {
+    cin >> K;
+    /*对每K个，即一个考点的人进行排序*/
+    for (int j = begin;j < begin + K;j++) {
+        cin >> person[j].ID >> person[j].score;
+        person[j].location = i;
+    }
+    for (int j = begin;j < begin + K;j++) {//遍历确定lrank
+        int lrank = 1;
+        for (int t = begin;t < begin + K;t++) {
+            if (person[t].score > person[j].score)
+                lrank++;
+        }
+        person[j].lrank = lrank;
+    }
+    begin += K;
+}
+sort(person, person + begin, cmp);
+person[0].rank = 1;
+for (int i = 1;i < begin;i++) {
+    if (person[i].score == person[i - 1].score) {
+        person[i].rank = person[i - 1].rank;
+    }
+    else {
+        person[i].rank = i + 1;//第几个同学就是第几位
+    }
+}
+```
 1037
 两组数据两两组合相乘，其和最大
 1.排序，保证最大与最大，最小与最小的组合且符号相同
