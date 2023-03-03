@@ -46,9 +46,12 @@ key = key.substr(3);//从第三位到末尾复制
 ```C++
 str1.compare(str2);
 ```
-也可以直接用!=, 相等则输出为0，不等则输出为1
+**== !=**
+string可以直接用!=以及==
 ```C++
-if(str1!=str2)
+//相等则输出为0，不等则输出为1，a和b的name不相等时，按照字母顺序排序
+if (a.name != b.name)//对name升序排序
+	return a.name < b.name;
 ```
 
 
