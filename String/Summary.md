@@ -3,6 +3,7 @@
 printf("%.1f %.1f\n", arr[i].Min, arr[i].Ave);
 //%.1f会自动执行四舍六入的操作,3.26->3.3，3.24->3.2
 //3.250->3.2，3.251->3.3
+//%.0f相当于四舍五入round()函数
 ```
 ### int <-> char
 **sprint() int->char**
@@ -39,6 +40,12 @@ int b = atoi(s.c_str());
 ```C++
 key = key.substr(3);//从第三位到末尾复制
 ```
+**compare()函数**
+
+如果相等则输出为0，不等则输出为-1。
+`str1.compare(str2);`
+
+
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
