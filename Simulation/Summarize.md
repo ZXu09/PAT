@@ -129,8 +129,9 @@ while (idx < K) {
 	idx++;
 }
 ```
+## 队列的使用
 ### 1017 Queueing at Bank 25
-**优先队列**
+**优先队列-时间有关**
 
 类似1014，N个窗口，所有人都呆在一根黄线之外（黄线内容纳1人）
 
@@ -143,7 +144,7 @@ struct person
 	int time;//等待的时间
 }p[maxn];
 sort(p, p + cnt, cmp);//按照到达银行的时间进行排序
-priority_queue<int, vector<int>, greater<int>>q;//按照升序排序的优先队列
+priority_queue<int, vector<int>, greater<int>>q;//按照升序排序的优先队列，Container是低层容器，此处为vector，定义了一个元素为整数的小顶堆（默认是大顶堆）
 for (int i = 0;i < K;i++) {
 	q.push(begin);//将每个窗口的起始值入队
 }
@@ -160,6 +161,77 @@ for (int i = 0;i < cnt;i++) {
 	}
 }
 printf("%.1f\n", (total / 60.0) / cnt * 1.0);//计算结果
+```
+
+### 1056 Mice and Rice 25
+**比赛进阶->队列queue实现**
+输入Np、Ng，分别代表总共的老鼠数量和一个组的老鼠数量，胜者进入下一轮
+输入一行Np：一组之中比赛的权重
+输入一行Np：比赛时老鼠的顺序，也就是说比赛是用新顺序order，**排名是按照原输入老鼠的顺序**
+
+```C++
+struct Node
+{
+	int weight;
+	int order;//存6 0 8 7...
+	int rank;
+	int porder;//存0 1 2 3...
+};
+bool cmp(Node a, Node b)
+{
+	return a.order < b.order;
+}
+vector<int>v(Np);
+vector<Node>w(Np);
+int num;
+for (int i = 0;i < Np;i++) {
+	cin >> v[i];
+}
+for (int i = 0;i < Np;i++) {
+	cin >> num;
+	w[i].order = num;//存6 0 8 7...
+	w[i].porder = i;//存0 1 2 3...
+	w[i].weight = v[num];//权重值按照order顺序，相当于排序后进行比赛
+}
+```
+输入时的权值就按照**排序后的进行使用**，暂用了第6的数值，最后回到第6
+- 输入：25 18 0 46 37 3 19 22 57 56 10
+- 比赛：19 25 57 22 ...
+- 输出：25 ...
+最后按照6 0 8 7...的顺序进行排序，就变回了初始排序
+
+```C++
+queue<Node>q;
+for (int i = 0; i < Np; i++)
+    q.push(w[i]);//按照给定的顺序入队，
+while (!q.empty()) {//队列不空的情况
+    int size = q.size();
+    if (size == 1) {//就一个元素
+        Node temp = q.front();
+        w[temp.porder].rank = 1;
+        break;
+    }
+    int group = size / Nc;//代表鼠鼠被分成了几组
+    if (size % Nc != 0)
+        group += 1;
+    Node maxnode;
+    int maxn = -1, cnt = 0;
+    for (int i = 0; i < size; i++) {
+        Node temp = q.front();
+        w[temp.porder].rank = group + 1;//一轮一轮地修改rank
+        q.pop();
+        cnt++;//记录一组的数量
+        if (temp.weight > maxn) {//更新Nc中最大的结点
+            maxn = temp.weight;
+            maxnode = temp;
+        }
+        if (cnt == Nc || i == size - 1) {
+            cnt = 0;
+            maxn = -1;
+            q.push(maxnode);//将最大的结点重新入队
+        }
+    }
+}
 ```
 
 ### 1026 Table Tennis 30
