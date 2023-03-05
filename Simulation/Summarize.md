@@ -297,6 +297,31 @@ int CountOnes(int N)
 	return count;
 }
 ```
+
+### 1051 Pop Sequence 25
+栈的容量是M，总共有N个数字，判断一个Pop Sequence是否可能存在
+```C++
+int j = 0;//入过栈的元素的个数
+int num = 1;//栈内元素的起始
+int stack[1010] = { 0 }, top = 0;//创建一个栈
+stack[top] = num;
+while (j < N) {//总共N个元素
+    if (seq[j] < stack[top])//比栈顶元素小如312的情况
+        break;
+    while (seq[j] > stack[top]) {//入栈直到能够输出seq[j]
+        stack[++top] = ++num;
+    }
+    if (top >= M)//逸出的情况
+        break;
+    if (seq[j] == stack[top])
+        top--;
+    j++;
+}
+ if (j == N)
+	cout << "YES" << endl;
+else
+	cout << "NO" << endl;
+```
 //进制转换类
 1010 Input:N1 N2 tag Radix
 N1在Radix进制的条件下找到一个N2的进制使得N2 == N1
