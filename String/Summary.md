@@ -82,6 +82,16 @@ if (a.name != b.name)//对name升序排序
 string s ="abc";
 reverse(s.begin(), s.end());//s: cba
 ```
+**5、erase()函数**
+```C++
+//删除在S2中找到的所有字符
+string S1, S2;
+for (int i = 0;i < S2.size();i++) {
+    while (S1.find(S2[i]) != -1) {
+        S1.erase(S1.find(S2[i]), 1);
+    }
+}
+```
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
