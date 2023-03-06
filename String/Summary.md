@@ -28,25 +28,48 @@ Sum += (Num[i]-'0');//ASCII-48
 char ans[10];
 int len = strlen(ans);
 ```
-
+***
 ### string<->int
 **string->int**（多个字符类型）
 ```C++
 string s;
 int b = atoi(s.c_str());
 ```
+**int->string**
+```C++
+string s;
+int a;
+s+=to_string(a);
+```
+### 1023 Have Fun with Numbers 20
+to_string的应用->string类型实现×2
+```C++
+//s1: 1234567899
+//s2: 存储s1×2之后的逆置结果
+//reverse_s2: 2469135798
+string s1, s2;
+cin >> s1;
+int r = 0;
+for (int i = s1.length() - 1; i >= 0; i--) {
+    int a = (s1[i] - '0') * 2 + r;//当前位
+    s2 += to_string(a % 10);//存储×2之后的结果(与结果相反)
+    r = a / 10;//进位
+}
+if (r != 0)
+    s2 += to_string(r);
+```
 ### string函数
-**substr()函数**
+**1、substr()函数**
 ```C++
 key = key.substr(3);//从第三位到末尾复制
 ```
-**compare()函数**
+**2、compare()函数**
 
 如果相等则输出为0，不等则输出为-1。
 ```C++
 str1.compare(str2);
 ```
-**== !=**
+**3、== !=**
 string可以直接用!=以及==
 ```C++
 //相等则输出为0，不等则输出为1，a和b的name不相等时，按照字母顺序排序
