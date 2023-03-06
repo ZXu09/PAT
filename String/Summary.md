@@ -76,8 +76,12 @@ string可以直接用!=以及==
 if (a.name != b.name)//对name升序排序
 	return a.name < b.name;
 ```
-
-
+**4、reverse()函数**
+```C++
+#include<algorithm>
+string s ="abc";
+reverse(s.begin(), s.end());//s: cba
+```
 int a,b;
 char ans[];
 sprintf(ans, "%d", a + b);
