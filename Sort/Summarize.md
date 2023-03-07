@@ -134,6 +134,56 @@ for (int i = 1;i < begin;i++) {
     }
 }
 ```
+
+### 1153 Decode Registration Card of PAT 25
+**unordered_map的应用**
+题目大意：给出一组学生的准考证号和成绩，准考证号包含了等级(乙甲顶)，考场号，日期，和个人编号信息，
+`B123180908127 99`
+- 等级：B
+- 考场：123
+- 日期：180908
+- 个人编号：127
+- 成绩：99
+并有三种查询方式
+1. 给出考试等级，找出该等级的考生，按照成绩降序，准考证升序排序
+2. 给出考场号，统计该考场的考生数量和总得分
+3. 给出考试日期，查询改日期下所有考场的考试人数，按照人数降序，考场号升序排序（本质上用准考证进行升序排序也许）
+```C++
+vector<node> v(n);
+struct node {
+    string t;//准考证号
+    int value;//成绩
+};
+bool cmp(const node &a, const node &b) {
+    if(a.value==b.value)
+        return a.t<b.t;
+    else return a.value>b.value;
+}
+for(int i=1;i<=K;i++){
+	vector<node> ans;
+	...
+}
+```
+分析：先把所有考生的准考证和分数记录下来～
+1. 按照等级查询，枚举选取匹配的学生，然后排序即可。
+若满足`v[j].t[0] == s[0]`，即等级相同的，入队ans。
+2.按照考场查询，枚举选取匹配的学生，然后计数、求和。
+若满足`v[j].t.substr(1, 3) == s`，即考场号相同的，统计人数及总分。
+3.按日期查询每个考场人数，用**unordered_map**存储，最后排序汇总。
+```C++
+unordered_map<string, int> m;
+for (int j = 0; j < n; j++)
+    if (v[j].t.substr(4, 6) == s) //满足考场日期一样
+	    m[v[j].t.substr(1, 3)]++;//该考生对应的site的num++
+for (auto it : m) 
+	ans.push_back({it.first, it.second});
+```
+注意:1.第三个用map存储会超时，用**unordered_map**就不会超时啦～
+2.排序传参建议用引用传参，这样更快，虽然有时候不用引用传参也能通过，但还是尽量用，养成好习惯
+最后`sort(ans.begin(), ans.end(),cmp);`
+
+
+
 1037
 两组数据两两组合相乘，其和最大
 1.排序，保证最大与最大，最小与最小的组合且符号相同
