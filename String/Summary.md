@@ -33,7 +33,7 @@ int len = strlen(ans);
 **string->int**（多个字符类型）
 ```C++
 string s;
-int b = atoi(s.c_str());
+int b = atoi(s.c_str());//若s转换过来的数太大，返回-1
 ```
 **int->string**
 ```C++
@@ -62,6 +62,7 @@ if (r != 0)
 **1、substr()函数**
 ```C++
 key = key.substr(3);//从第三位到末尾复制
+key = key.substr(3,5);//从第三位开始复制5个数字
 ```
 **2、compare()函数**
 
