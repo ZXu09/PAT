@@ -34,9 +34,45 @@ void Traversal(int prel, int prer, int postl, int postr)
 }
 ```
 
-### 1043  Is It a Binary Search Tree 25
+### 1154 Vertex Coloring 25 -完全二叉树的遍历-数组下标（因为给定层序遍历）
+**保留路径的遍历->利用数组下标，仅访问叶子结点的反向先序遍历**
+- 给出一颗**完全二叉树的层序遍历**
+- 打印出从**根节点到所有叶节点的路径**，打印顺序先右后左，即先序遍历的镜像。
+- 然后判断该树是**大顶堆、小顶堆或者不是堆**
+1.遍历（**完全二叉树的遍历用数组下标即可**）打印出所有路径（从右往左，即先序的镜像），**vector保存一路上的节点**，通过push和pop回溯，维护路径。  
+2.判断是否为堆：**从第二个节点开始遍历，如果比父节点小，就不是小顶堆**，如果比父节点大，就不是大顶堆
+```C++
+void traversal(int index) 
+{
+    //index <= n是对只有左叶节点没有右叶节点的点特判
+    if (index * 2 > n && index * 2 + 1 > n) {//叶子结点
+        if (index <= n) {
+            for (int i = 0; i < v.size(); i++)
+                printf("%d%s", v[i], i != v.size() - 1 ? " " : "\n");
+        }
+    }
+    else {
+        v.push_back(a[index * 2 + 1]);//右结点入队
+        traversal(index * 2 + 1);
+        v.pop_back();
+        v.push_back(a[index * 2]);//左节点入队
+        traversal(index * 2);
+        v.pop_back();
+    }
+}
+for (int i = 1; i <= n; i++)
+    scanf("%d", &a[i]);
+v.push_back(a[1]);//根节点入队
+traversal(1);
+for (int i = 2; i <= n; i++) {//遍历除根外每一个结点
+    if (a[i/2] > a[i]) isMin = 0;
+    if (a[i/2] < a[i]) isMax = 0;
+}
+```
+***
+### 1043  Is It a Binary Search Tree 25 -递归判断是否BST-交叉
 - 输入先序遍历的序列
-- 递归思想：对每个根节点，判断其是否满足BST的定义
+- 递归思想：对每个根节点，判断其**是否满足BST的定义（左小右大）**
 ```C++
 void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
 {
@@ -69,6 +105,38 @@ void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
 5 7 8 11
 pre[]=8 6 5 7 10 8 11 -> 8 6 5 7 10 8 11
  	i          j           j  i
+```
+
+### 1064 Complete Binary Search Tree 30 -递归填CBST的值-左子树
+**计算左子树长度**
+- 输入一段序列，然后我们将其排序
+- 输出这段序列组合成的**完全二叉树的层序遍历**（index实现，也就是对index进行排序）
+ 1. BST -> level order traversal；排序后的**BST相当于中序遍历**
+ 2. 利用BST的性质，判断左子树的长度，得到根节点的值（**填值方式，类似先序遍历**），这期间顺便记录每个结点的index
+ 3. 层序遍历：利用index，即root
+```C++
+void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
+{
+	if (L == 0)
+		return;
+	int level = 1;//计算N个结点的完全二叉树的高度
+	int lastlevel;//最后一层的结点数
+	int maxlevel;//最后一层最多的结点数
+	while ((pow(2, level / 1.0) - 1) < L) {
+		level++;
+	}
+	lastlevel = L - (pow(2, (level - 1) / 1.0) - 1);
+	maxlevel = pow(2, (level - 1) / 1.0);
+
+	int leftnode = LeftNode(maxlevel, lastlevel, level);
+	int rightnode = L - leftnode - 1;
+
+	Tree[treeL].index = index;
+	Tree[treeL].value = Array[leftnode + lnode];//数值比左子树都大，同时也关乎自己的根节点的位置
+	Sort_CBT(leftnode, 2 * index + 1, treeL + 1, lnode);
+	//加上左子树和根节点的
+	Sort_CBT(rightnode, 2 * index + 2, treeL + 1 + leftnode, lnode + leftnode + 1);
+}
 ```
 ***
 **树状数组**
@@ -117,37 +185,6 @@ void PeekMedian() //二分法
 			left = mid + 1;
 	}
 	printf("%d\n", left);
-}
-```
-
-### 1064 Complete Binary Search Tree 30 -计算左子树长度
-- 输入一段序列，然后我们将其排序
-- 输出这段序列组合成的**完全二叉树的层序遍历**（index实现，也就是对index进行排序）
- 1. BST -> level order traversal；排序后的**BST相当于中序遍历**
- 2. 利用BST的性质，判断左子树的长度，得到根节点的值（**填值方式，类似先序遍历**），这期间顺便记录每个结点的index
- 3. 层序遍历：利用index，即root
-```C++
-void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
-{
-	if (L == 0)
-		return;
-	int level = 1;//计算N个结点的完全二叉树的高度
-	int lastlevel;//最后一层的结点数
-	int maxlevel;//最后一层最多的结点数
-	while ((pow(2, level / 1.0) - 1) < L) {
-		level++;
-	}
-	lastlevel = L - (pow(2, (level - 1) / 1.0) - 1);
-	maxlevel = pow(2, (level - 1) / 1.0);
-
-	int leftnode = LeftNode(maxlevel, lastlevel, level);
-	int rightnode = L - leftnode - 1;
-
-	Tree[treeL].index = index;
-	Tree[treeL].value = Array[leftnode + lnode];//数值比左子树都大，同时也关乎自己的根节点的位置
-	Sort_CBT(leftnode, 2 * index + 1, treeL + 1, lnode);
-	//加上左子树和根节点的
-	Sort_CBT(rightnode, 2 * index + 2, treeL + 1 + leftnode, lnode + leftnode + 1);
 }
 ```
 ***
