@@ -29,7 +29,7 @@ else {
 		s1 = N + (S1[1] - '0') * 10 + S1[2] - '0';//跳过N number of houses
 	else s1 = N + S1[1] - '0';
 }
-```
+``` 
 ### 1122 Hamiltonian Cycle 25 判断无重复环-set的应用
 ```C++
 vector<int>v;//向量
@@ -41,6 +41,21 @@ if (v[0] != v[K - 1])//不满足环
 for (int i = 0; i < K - 1; i++)
 	if (G[v[i]][v[i + 1]] == 0) 
 		flag = false;
+```
+
+### 1154 Vertex Coloring 25
+仅遍历所有边时的应用
+```C++
+struct node{
+    int t1, t2;
+};
+for(int i=0;i<M;i++){
+    cin>>v[i].t1>>v[i].t2;//只需要遍历每一条边时
+}
+for(int j=0;j<M;j++){//遍历每条边
+    if (color[v[j].t1] == color[v[j].t2])//边的两个顶点颜色相同
+    ...
+}
 ```
 ## 二、DFS
 ### 1126 Eulerian Path 25 -DFS(int S)
