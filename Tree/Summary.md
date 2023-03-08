@@ -121,8 +121,10 @@ void PeekMedian() //二分法
 ```
 
 ### 1064 Complete Binary Search Tree 30 -计算左子树长度
- 1. BST -> level order traversal；排序后的BST相当于中序遍历
- 2. 利用BST的性质，判断左子树的长度，得到根节点的值
+- 输入一段序列，然后我们将其排序
+- 输出这段序列组合成的**完全二叉树的层序遍历**（index实现，也就是对index进行排序）
+ 1. BST -> level order traversal；排序后的**BST相当于中序遍历**
+ 2. 利用BST的性质，判断左子树的长度，得到根节点的值（**填值方式，类似先序遍历**），这期间顺便记录每个结点的index
  3. 层序遍历：利用index，即root
 ```C++
 void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
@@ -142,7 +144,7 @@ void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
 	int rightnode = L - leftnode - 1;
 
 	Tree[treeL].index = index;
-	Tree[treeL].value = Array[leftnode + lnode];
+	Tree[treeL].value = Array[leftnode + lnode];//数值比左子树都大，同时也关乎自己的根节点的位置
 	Sort_CBT(leftnode, 2 * index + 1, treeL + 1, lnode);
 	//加上左子树和根节点的
 	Sort_CBT(rightnode, 2 * index + 2, treeL + 1 + leftnode, lnode + leftnode + 1);
@@ -154,6 +156,7 @@ An AVL tree is a self-balancing binary search tree.
 利用定义实现
 
 ### 1066 Root of AVL Tree 25
+- 给定一段序列要求插入AVL树中
 ```C++
 BinTree LL(BinTree T)
 {
@@ -202,8 +205,15 @@ BinTree Insert(BinTree T, int V)
 AVL树的知识以及1110 Complete Binary Tree的Levelorder遍历(利用flag)
 
 ### 1099 Build A Binary Search Tree 30
-inorder中序遍历填值，因为是BST树满足左边小右边大，因此将key排序后就可以填值
+- 给定0 to N−1的结点的左结点和右结点的下标，以及N个待填入完全二叉树的值
+- **inorder中序遍历填值**，因为是BST树满足左边小右边大，因此将key排序后就可以填值（**BST树的中序遍历递增**）
+- 输出其层序遍历的结果
+
 ```C++
+struct Node
+{
+	int left, right, data;
+};
 void inOrder(int root)//中序遍历填值
 {
 	if (root == -1) return;
