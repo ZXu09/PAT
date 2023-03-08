@@ -48,8 +48,17 @@ for (int j = 0; j < n; j++)
     if (v[j].t.substr(4, 6) == s) //满足考场日期一样
     	//key->v[j].t.substr(1, 3)
     	m[v[j].t.substr(1, 3)]++;//该考生对应的site的num++
-for (auto it : m) 
+for (auto it : m) //遍历unordered_map内元素
 	ans.push_back({it.first, it.second});
+```
+### set
+默认按照升序的排列方式，且元素不重复
+```C++
+set<int>s;
+int a;
+s.insert(a);
+for(auto it=s.begin();it!=s.end();it++)//遍历set内元素
+    	cout<<*it<<" ";
 ```
 ### git
 git init
