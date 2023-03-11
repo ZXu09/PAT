@@ -23,7 +23,22 @@ cin >>ID;
 getchar();//输入换行符
 getline(cin, title);
 ```
-
+### 并查集
+```C++
+int Union[1010];//实现并查集，存储该结点的父结点
+int Find(int a) {//一直查询直到父结点为自己（无父结点）
+    if (Union[a] != a) 
+    	return Union[a] = Find(Union[a]);
+    return a;
+}
+void add(int a, int b) {//序号小的为根
+    int f1 = Find(a), f2 = Find(b);
+    if (f1 < f2) Union[f2] = f1;
+    else Union[f1] = f2;
+}
+for(int i=1;i<=1000;i++)
+     Union[i]=i;//初始化父结点为当前结点
+```
 **素数**
 ```C++
 #include<cmath>
