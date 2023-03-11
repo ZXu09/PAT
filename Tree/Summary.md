@@ -4,7 +4,25 @@
 postorder and inorder -> level order后序中序输出层序
  1. `solve(int PreL, int InL, int PostL, int L, int index);`递归得到前序并记录index
  2. 利用完全二叉树存储index，利用index的大小进行排序输出
-
+```C++
+void solve(int PreL, int InL, int PostL, int index, int L)
+{
+	if (L == 0)//边界条件
+		return;
+	int root = Postorder[PostL + L - 1];//后序遍历最右侧
+	Preorder[PreL].index = index;
+	Preorder[PreL].value = root;
+	int i;
+	for (i = 0;i < N;i++) {
+		if (Inorder[InL + i] == root)
+			break;
+	}
+	int l_Length = i;//左子树的长度
+	int r_Length = L - l_Length - 1;//右子树的长度
+	solve(PreL + 1, InL, PostL, index * 2 + 1, l_Length);
+	solve(PreL + l_Length + 1, InL + l_Length + 1, PostL + l_Length, index * 2 + 2, r_Length);
+}
+```
 ### 1086 Tree Traversals Again 25
 **栈和遍历之间的关系**：
  1. PUSH：preorder
