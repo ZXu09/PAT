@@ -23,6 +23,43 @@ void solve(int PreL, int InL, int PostL, int index, int L)
 	solve(PreL + l_Length + 1, InL + l_Length + 1, PostL + l_Length, index * 2 + 2, r_Length);
 }
 ```
+### 1159 Structure of a Binary Tree 30
+通过中序和后序遍历树
+- full：所有非叶子结点都有两个子结点
+- 询问两个结点之间的关系比如：父子、兄弟、左右、相同层；以及树根
+```C++
+int inorder[40];
+int postorder[40];
+int N, M, nodes = 0;//nodes记录结点数量
+bool full = true;
+struct node
+{
+    int left = -1, right = -1, level = -1, siblings = -1;//siblings = -1代表无兄妹
+}tree[1002];//啊啊啊数组开小了一直没AC
+int solve(int length, int postl, int inl, int level)//返回当前子树根节点的数值
+{
+    if (length == 0)
+        return -1;//空结点
+    int root = postorder[postl + length - 1];
+    int i;
+    for (i = 0;i < N;i++) {//找到左子树，此时i就是左子树的大小
+        if (inorder[i + inl] == root)
+            break;
+    }
+    int leftlength = i;
+    int rightlength = length - i - 1;
+
+    tree[root].level = level;
+    tree[root].left = solve(leftlength, postl, inl, level + 1);
+    tree[root].right = solve(rightlength, postl + leftlength, inl + leftlength + 1, level + 1);
+    tree[tree[root].left].siblings = tree[root].right;
+    tree[tree[root].right].siblings = tree[root].left;
+    if ((tree[root].left == -1 && tree[root].right != -1) ||
+        (tree[root].right == -1 && tree[root].left != -1))
+        full = false;
+    return root;
+}
+```
 ### 1086 Tree Traversals Again 25
 **栈和遍历之间的关系**：
  1. PUSH：preorder
