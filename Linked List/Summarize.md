@@ -124,6 +124,25 @@ while (Address != -1) {
 	Address = Array[Address].next;
 }
 ```
+### 1161 Merging Linked Lists
+给定两个单链表L1 = a1 → a2 → … → an-1 → an，和L2 = b1 → b2 → … → bm-1 → bm
+
+如果n ≥2m，你的任务是将较短的那个链表逆序，然后将之并入比较长的那个链表，得到一个形如a1 → a2 → bm → a3 → a4 → bm-1 … 的结果
+
+用vector<int> L1、L2存储题目中给定的两个链表，vector<int> ans保存合并后的链表，使得L1较长。  
+**如果当前i是奇数（i & 1不等于0）就把L2的一个结点添加到ans中，直到L2中没有剩余元素**
+
+格式：`Address Data Next`
+```C++
+struct node {//对应address的data、next
+    int data, next;
+}A[100000];
+//L1存储链表1的address,L2存储链表2的address
+for (int i = 0, c = L2.size() - 1; i < L1.size(); i++) {
+    ans.push_back(L1[i]);
+    if (i & 1 && c >= 0) ans.push_back(L2[c--]);//i为奇数且链表2还有结点
+}
+```
 
 ### 1079 Total Sales of Supply Chain 25
 题目大意：给一棵树，在树根出货物的价格为p，然后从根结点开始每往下走一层，该层的货物价格将会在父亲结点的价格上增加r%，给出每个叶结点的货物量，求他们的价格之和
@@ -193,6 +212,7 @@ void DFS(int S, int deep)
 	}
 }
 ```
+
 
 ### 1114 Family Property 25
 **并查集**
