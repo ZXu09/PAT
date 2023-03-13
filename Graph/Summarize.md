@@ -351,11 +351,42 @@ void DFS(int vi)//传入有问题的地点
 ```
 ### 1030 Travel Plan 30 -DFS(int D)+Dijkstra(int S)
 - 边上存储distance和cost，找distance最小，相同则找cost最小，思路与1018一致，更加简单一些
-					       
+
 ### 1087 All Roads Lead to Rome 30 -DFS(int D)+Dijkstra(int S)
 - 边上存储cost，点上存储happiness，找cost最小，相同则找happiness最大，再相同则找平均happiness最大
-					       
 
-
+### 1163 Dijkstra Sequence
+- 判断一个点的序列是不是按Dijkstra算法遍历的结果
+- 使用Dijkstra算法，若**当前最少的距离的结点**计算出来不是now，则不是Dijkstra
+```C++
+void Dijkstra(int x, int index, vector<int> Path) {
+    while (1) {
+        int Min = INF, now = Path[index];//当前结点
+        for (int i = 1; i <= V; i++) {//遍历该结点的邻接结点
+            //距离不更大，且未访问过
+            if (Dist[i] != INF && !visited[i] && Dist[i] <= Min) {
+                if (Dist[i] < Min) {//距离更小时
+                    //一开始Dist[start]=0，故第一轮i一定等于now
+                    if (i == now)
+                        flag = 1;
+                    else flag = 0;//i和now不一致
+                }
+                else if (Dist[i] == Min) {//距离相等时
+                    if (i == now)
+                        flag = 1;
+                }
+                Min = Dist[i];//更新最短的距离
+            }
+        }
+        if (!flag) return;//出现了flag=0的情况
+        index++;
+        if (index > V) return;//遍历到了结尾
+        visited[now] = 1;//now被访问过
+        for (int i = 1; i <= V; i++) //更新Dist
+            if (!visited[i] && Dist[i] > Dist[now] + G[now][i])
+                Dist[i] = Dist[now] + G[now][i];
+    }
+}
+```
 
 
