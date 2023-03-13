@@ -1,4 +1,4 @@
-**Traversal**
+## Traversal
 - 通过两个如前序和中序的序列求另一个序列
 ### 1020 Tree Traversals 25
 postorder and inorder -> level order后序中序输出层序
@@ -23,6 +23,7 @@ void solve(int PreL, int InL, int PostL, int index, int L)
 	solve(PreL + l_Length + 1, InL + l_Length + 1, PostL + l_Length, index * 2 + 2, r_Length);
 }
 ```
+
 ### 1159 Structure of a Binary Tree 30
 通过中序和后序遍历树
 - full：所有非叶子结点都有两个子结点
@@ -60,6 +61,7 @@ int solve(int length, int postl, int inl, int level)//返回当前子树根节�
     return root;
 }
 ```
+
 ### 1086 Tree Traversals Again 25
 **栈和遍历之间的关系**：
  1. PUSH：preorder
@@ -89,13 +91,39 @@ void Traversal(int prel, int prer, int postl, int postr)
 }
 ```
 
+### 1162 Postfix Expression -后缀表达式-后序遍历
+- 输入：给定对应的`data left_child right_child`，left和right对应输入的第几行的结点（输入后找到root就相当于已经**建树完成**）
+- 建树：给定的输入内包括了左右子树的信息
+- 输出：对应树的后缀表达式（**如果只有右子树（语法树不会存在只有左子树没有右子树的情况），那么就在输出当前结点内容后进入右孩子结点继续搜索**）
+```C++
+void postorder(int root)
+{
+    if(root == -1)
+        return;
+    printf("(");
+
+    postorder(tree[root].left);
+    if(tree[root].left ==-1&& tree[root].right!=-1){//只有右子树
+        cout<<tree[root].data;
+        postorder(tree[root].right);
+    }
+    else{
+        postorder(tree[root].right);
+        cout<<tree[root].data;
+    }
+    printf(")");
+}
+```
+
+## CBT(Complete Binary Tree)
 ### 1154 Vertex Coloring 25 -完全二叉树的遍历-数组下标（因为给定层序遍历）
 **保留路径的遍历->利用数组下标，仅访问叶子结点的反向先序遍历**
-- 给出一颗**完全二叉树的层序遍历**
-- 打印出从**根节点到所有叶节点的路径**，打印顺序先右后左，即先序遍历的镜像。
-- 然后判断该树是**大顶堆、小顶堆或者不是堆**
-1.遍历（**完全二叉树的遍历用数组下标即可**）打印出所有路径（从右往左，即先序的镜像），**vector保存一路上的节点**，通过push和pop回溯，维护路径。  
-2.判断是否为堆：**从第二个节点开始遍历，如果比父节点小，就不是小顶堆**，如果比父节点大，就不是大顶堆
+- 输入：给出一颗**完全二叉树的层序遍历**
+- 建树：**完全二叉树的遍历用数组下标即可，通过2* index获得左右结点，相当于已经建树完成**
+- 输出：打印出从**根节点到所有叶节点的路径**，打印顺序先右后左，即先序遍历的镜像。
+- 输出：然后判断该树是**大顶堆、小顶堆或者不是堆**
+1. 遍历打印出所有路径（从右往左，即先序的镜像），**vector保存一路上的节点**，通过push和pop回溯，维护路径。  
+2. 判断是否为堆：**从第二个节点开始遍历，如果比父节点小，就不是小顶堆**，如果比父节点大，就不是大顶堆
 ```C++
 void traversal(int index) 
 {
@@ -124,9 +152,50 @@ for (int i = 2; i <= n; i++) {//遍历除根外每一个结点
     if (a[i/2] < a[i]) isMax = 0;
 }
 ```
-***
+
+### 1110 Complete Binary Tree 25
+- 输入：0 to N−1的结点的左右结点，若无子结点对应"-"
+- 建树：自带左右子树信息，已经建树完成
+- 输出：判断是否是CBT，是则输出最后一个结点
+- 我的方法：Levelorder遍历(利用flag)，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
+- 柳神方法：Inorder遍历找到最大index下标，对比结点数
+```C++
+struct Node {
+	int left, right;
+}A[21];
+int last;//存储最后一个结点
+bool Levelorder(int root)
+{
+	queue<int>q;
+	q.push(root);
+	bool flag = true;
+	while (!q.empty()) {
+		int tmp = q.front();
+		q.pop();
+		last = tmp;//不断更新最后一个结点
+		if (A[tmp].left == -1)
+			flag = false;
+		else {
+			q.push(A[tmp].left);
+			if (!flag)
+				return false;
+		}
+		if (A[tmp].right == -1)
+			flag = false;
+		else {
+			q.push(A[tmp].right);
+			if (!flag)
+				return false;
+		}
+	}
+	return true;
+}
+```
+## BST(Binary Search Tree)
 ### 1043  Is It a Binary Search Tree 25 -递归判断是否BST-交叉
-- 输入先序遍历的序列
+- 输入：先序遍历的序列
+- 建树：利用递归，即先序遍历中划分左右子树（左边比根小，右边比根大），遍历根结点
+- 输出：判断是否是BST，并输出其后序遍历
 - 递归思想：对每个根节点，判断其**是否满足BST的定义（左小右大）**
 ```C++
 void PostOrder(int l, int r)//先序遍历最左为根，最右为最大值
@@ -163,9 +232,10 @@ pre[]=8 6 5 7 10 8 11 -> 8 6 5 7 10 8 11
 ```
 
 ### 1064 Complete Binary Search Tree 30 -递归填CBST的值-左子树
-**计算左子树长度**
-- 输入一段序列，然后我们将其排序
-- 输出这段序列组合成的**完全二叉树的层序遍历**（index实现，也就是对index进行排序）
+**计算左子树长度**  
+- 输入：一段序列，然后我们将其排序（得到中序遍历）
+- 建树：利用递归，即先序遍历填根结点的值（BST的性质，比左子树的结点都大）
+- 输出：这段序列组合成的**完全二叉树的层序遍历**（index实现，也就是对index进行排序）
  1. BST -> level order traversal；排序后的**BST相当于中序遍历**
  2. 利用BST的性质，判断左子树的长度，得到根节点的值（**填值方式，类似先序遍历**），这期间顺便记录每个结点的index
  3. 层序遍历：利用index，即root
@@ -193,8 +263,84 @@ void Sort_CBT(int L, int index, int treeL, int lnode)//lnode用于累加
 	Sort_CBT(rightnode, 2 * index + 2, treeL + 1 + leftnode, lnode + leftnode + 1);
 }
 ```
-***
-**树状数组**
+
+### 1099 Build A Binary Search Tree 30
+- 输入：给定0 to N−1的结点的左结点和右结点的下标，以及N个待填入BST的值
+- 建树：**inorder中序遍历填值**，比上面一题简单，因为已经有了树的结构
+- 输出：层序遍历的结果
+
+```C++
+struct Node
+{
+	int left, right, data;
+};
+void inOrder(int root)//中序遍历填值
+{
+	if (root == -1) return;
+	inOrder(T[root].left); //-1也要插入
+	T[root].data = key[num++];
+	inOrder(T[root].right);
+}
+void Levelorder(int root)
+{
+	queue<int> q;
+	q.push(root);
+	bool flag = false;//控制输出格式
+	while (!q.empty()) {
+		int tmp = q.front();
+		q.pop();
+		if (!flag) {
+			cout << Array[tmp].data;
+			flag = true;
+		}
+		else cout << " " << Array[tmp].data;
+		if (Array[tmp].left != -1)
+			q.push(Array[tmp].left);
+		if (Array[tmp].right != -1)
+			q.push(Array[tmp].right);
+	}
+}
+```
+### 1102 Invert a Binary Tree 25
+类似1099的解决方法
+
+### 1115 Counting Nodes in a Binary Search Tree
+求一个二叉搜索树最后两层的结点
+```C++
+struct Node
+{
+	int data;
+	PNode left, right;
+};
+
+PNode Build(PNode root, int data)
+{
+	if (root == NULL) {
+		root = new Node();
+		root->data = data;
+		root->left = root->right = NULL;
+	}
+	else if (data <= root->data)
+		root->left = Build(root->left, data);
+	else
+		root->right = Build(root->right, data);
+	return root;
+}
+int Num[1010];//存储对应层数的结点个数
+int maxdepth = -1;//由于会递归到空结点，故为最深的层数+1
+
+void Inorder(PNode root, int depth) {
+	if (root == NULL) {
+		maxdepth = max(depth, maxdepth);
+		return;
+	}
+	Num[depth]++;
+	Inorder(root->left, depth + 1);
+	Inorder(root->right, depth + 1);
+}
+```
+
+## 树状数组
 
  1. 单点修改：更改数组中一个元素的值
  2. 区间查询：查询一个区间内所有元素的和
@@ -242,9 +388,9 @@ void PeekMedian() //二分法
 	printf("%d\n", left);
 }
 ```
-***
-**AVL树（平衡二叉树）**
-An AVL tree is a self-balancing binary search tree.
+
+## AVL树（平衡二叉树）
+An AVL tree is a self-balancing binary search tree.  
 利用定义实现
 
 ### 1066 Root of AVL Tree 25
@@ -295,84 +441,4 @@ BinTree Insert(BinTree T, int V)
 
 ### 1123 Is It a Complete AVL Tree 30
 AVL树的知识以及1110 Complete Binary Tree的Levelorder遍历(利用flag)
-
-### 1099 Build A Binary Search Tree 30
-- 给定0 to N−1的结点的左结点和右结点的下标，以及N个待填入完全二叉树的值
-- **inorder中序遍历填值**，因为是BST树满足左边小右边大，因此将key排序后就可以填值（**BST树的中序遍历递增**）
-- 输出其层序遍历的结果
-
-```C++
-struct Node
-{
-	int left, right, data;
-};
-void inOrder(int root)//中序遍历填值
-{
-	if (root == -1) return;
-	inOrder(T[root].left); //-1也要插入
-	T[root].data = key[num++];
-	inOrder(T[root].right);
-}
-void Levelorder(int root)
-{
-	queue<int> q;
-	q.push(root);
-	bool flag = false;//控制输出格式
-	while (!q.empty()) {
-		int tmp = q.front();
-		q.pop();
-		if (!flag) {
-			cout << Array[tmp].data;
-			flag = true;
-		}
-		else cout << " " << Array[tmp].data;
-		if (Array[tmp].left != -1)
-			q.push(Array[tmp].left);
-		if (Array[tmp].right != -1)
-			q.push(Array[tmp].right);
-	}
-}
-```
-### 1102 Invert a Binary Tree 25
-类似1099的解决方法
-
-### 1110 Complete Binary Tree 25
-- 我的方法：Levelorder遍历(利用flag)，若一个结点存在左/右子树且之前已经有结点没有左/右子树，说明不是完全二叉树
-- 柳神方法：Inorder遍历找到最大index下标，对比结点数
-
-### 1115 Counting Nodes in a Binary Search Tree
-求一个二叉搜索树最后两层的结点
-```C++
-struct Node
-{
-	int data;
-	PNode left, right;
-};
-
-PNode Build(PNode root, int data)
-{
-	if (root == NULL) {
-		root = new Node();
-		root->data = data;
-		root->left = root->right = NULL;
-	}
-	else if (data <= root->data)
-		root->left = Build(root->left, data);
-	else
-		root->right = Build(root->right, data);
-	return root;
-}
-int Num[1010];//存储对应层数的结点个数
-int maxdepth = -1;//由于会递归到空结点，故为最深的层数+1
-
-void Inorder(PNode root, int depth) {
-	if (root == NULL) {
-		maxdepth = max(depth, maxdepth);
-		return;
-	}
-	Num[depth]++;
-	Inorder(root->left, depth + 1);
-	Inorder(root->right, depth + 1);
-}
-```
 
