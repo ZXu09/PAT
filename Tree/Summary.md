@@ -115,6 +115,39 @@ void postorder(int root)
 }
 ```
 
+### 1167 Cartesian Tree
+- 输入：最小堆的中序遍历
+- 建树：利用最小堆的规律可以很好的**找到根结点**，再根据左中右的中序遍历可以**划分左右子树**
+- 输出：最小堆的层序遍历，在建树时传入index参数
+```C++
+struct node{
+    int data,index;//index用于层序遍历
+};
+node inorder[32];
+//找左右子树中最小的，对应其左右子结点
+void Traversal(int inl,int inr,int root,int index)//传入root对应的序号，比如1对应的4
+{
+    if(inl>inr)return;
+    int leftmax=INF,rightmax=INF;
+    int left = -1,right = -1;
+    for(int i = inl;i<root;i++){
+        if(inorder[i].data<leftmax){
+            leftmax = inorder[i].data;
+            left = i;
+        }
+    }
+    for(int i = root+1;i<=inr;i++){
+        if(inorder[i].data<rightmax){
+            rightmax = inorder[i].data;
+            right = i;
+        }
+    }
+    inorder[root].index=index;
+    Traversal(inl,root-1,left,2*index);
+    Traversal(root+1,inr,right,2*index+1);
+}
+```
+
 ## CBT(Complete Binary Tree)
 ### 1154 Vertex Coloring 25 -完全二叉树的遍历-数组下标（因为给定层序遍历）
 **保留路径的遍历->利用数组下标，仅访问叶子结点的反向先序遍历**
