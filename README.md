@@ -53,6 +53,17 @@ bool isPrime(int N)
 	return true;
 }
 ```
+
+### map
+map内部实现红黑树
+```C++
+map<string, int> m;//实现string->int(key:string, value:int)
+int cnt = 0, t;
+string s1;
+m[s1] = cnt;
+if(m.find(s1) != m.end())//m内存在元素
+	t = m[s1];
+```
 ### unordered_map
 unordered_map查询单个key的时候效率比map高，但是要查询某一范围内的key值时比map效率低
 map内部实现了一个红黑树，该结构具有自动排序的功能，因此map内部的所有元素都是有序的
