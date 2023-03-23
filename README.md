@@ -66,21 +66,7 @@ string s1;
 m[s1] = cnt;
 if(m.find(s1) != m.end())//m内存在元素
 	t = m[s1];
-//遍历
-map<string, set<string>> mp;//key, value 对value值也就是ID进行排序
-if (mp[key].size() == 0) {//没找到
-	cout << "Not Found" << endl;
-}
-else {
-	for (auto it : mp[key]) {//采取auto类型+ 增强for 循环(auto迭代)
-	cout << it << endl;
-	}
-}
-//提速版本
-map<int, vector<string>>mp;//key:id,value:student
-sort(mp[i].begin(), mp[i].end());//对每个课程进行sort
 ```
-
 ### unordered_map
 unordered_map查询单个key的时候效率比map高，但是要查询某一范围内的key值时比map效率低
 map内部实现了一个红黑树，该结构具有自动排序的功能，因此map内部的所有元素都是有序的
@@ -94,7 +80,6 @@ for (int j = 0; j < n; j++)
 for (auto it : m) //遍历unordered_map内元素
 	ans.push_back({it.first, it.second});
 ```
-
 ### set
 默认按照升序的排列方式，且元素不重复
 ```C++
@@ -104,6 +89,9 @@ s.insert(a);
 for(auto it=s.begin();it!=s.end();it++)//遍历set内元素
     	cout<<*it<<" ";
 ```
+
+### unordered_set
+元素不重复
 ### git
 git init
 git add. 准备提交
