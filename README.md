@@ -23,6 +23,9 @@ cin >>ID;
 getchar();//输入换行符
 getline(cin, title);
 ```
+### 重点细节
+- atoi()函数：`atoi(S1.c_str());//string->int`
+- 
 ### 并查集
 ```C++
 int Union[1010];//实现并查集，存储该结点的父结点
