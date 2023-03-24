@@ -149,7 +149,7 @@ void Traversal(int inl,int inr,int root,int index)//传入root对应的序号，
 ```
 
 ## CBT(Complete Binary Tree)
-### 1154 Vertex Coloring 25 -完全二叉树的遍历-数组下标（因为给定层序遍历）
+### 1155 Heap Paths 30 -完全二叉树的遍历-数组下标（因为给定层序遍历）
 **保留路径的遍历->利用数组下标，仅访问叶子结点的反向先序遍历**
 - 输入：给出一颗**完全二叉树的层序遍历**
 - 建树：**完全二叉树的遍历用数组下标即可，通过2 * index获得左右结点，相当于已经建树完成**
