@@ -429,6 +429,27 @@ An AVL tree is a self-balancing binary search tree.
 ### 1066 Root of AVL Tree 25
 - 给定一段序列要求插入AVL树中
 ```C++
+typedef struct TreeNode* BinTree;
+struct TreeNode
+{
+	BinTree left, right;
+	int data;
+	int height;
+};
+BinTree MakeTree(int V)
+{
+	BinTree T = (BinTree)malloc(sizeof(struct TreeNode));
+	T->left = T->right = NULL;
+	T->data = V;
+	T->height = 0;
+	return T;
+}
+int GetHeight(BinTree T)
+{
+	if (!T)
+		return -1;
+	else return T->height;
+}
 BinTree LL(BinTree T)
 {
 	BinTree B = T->left;
@@ -440,7 +461,7 @@ BinTree LL(BinTree T)
 }
 BinTree LR(BinTree T)
 {
-	T->right = RR(T->right);
+	T->left = RR(T->left);
 	return LL(T);
 }
 BinTree Insert(BinTree T, int V)
